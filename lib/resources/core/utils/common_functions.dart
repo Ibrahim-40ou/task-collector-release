@@ -59,6 +59,7 @@ class CommonFunctions {
       onGranted();
       return;
     } else if (key == 'photos' && await Permission.photos.status.isGranted) {
+      print('humbargarriah2222');
       onGranted();
       return;
     }

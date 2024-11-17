@@ -23,6 +23,7 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(context.router.current.name);
     return BlocConsumer<AuthBloc, AuthState>(
       listener: (BuildContext context, state) {
         if (state is SendOTPFailure) {
@@ -35,13 +36,16 @@ class LoginPage extends StatelessWidget {
           );
         }
         if (state is SendOTPSuccess) {
-          context.read<TimerCubit>().resetTimer();
-          context.router.push(
-            OTPRoute(
-              phoneNumber: _phoneNumber.text.trim(),
-              registering: false,
-            ),
-          );
+          if(context.router.current.name == 'LoginRoute') {
+            context.read<TimerCubit>().resetTimer();
+            context.router.push(
+              OTPRoute(
+                phoneNumber: _phoneNumber.text.trim(),
+                registering: false,
+              ),
+            );
+          }
+
         }
       },
       builder: (BuildContext context, state) {

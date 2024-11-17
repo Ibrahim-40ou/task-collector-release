@@ -41,84 +41,81 @@ class ProfileInformationPage extends StatelessWidget {
   Widget build(BuildContext context) {
     bool isDarkMode = CommonFunctions().darkModeCheck(context);
 
-    return BlocProvider<ImageSelectionBloc>(
-      create: (BuildContext context) => ImageSelectionBloc(),
-      child: BlocConsumer<UserInformationBloc, UserInformationState>(
-        listener: (BuildContext context, state) {
-          if (state is UpdateUserInformationSuccess) {
-            CommonFunctions().showSnackBar(context, 'profile updated'.tr());
-          }
-          if (state is UpdateUserInformationFailure) {
-            CommonFunctions().showDialogue(
-              context,
-              state.failure!,
-              '',
-              () {},
-              () {},
-            );
-          }
-        },
-        builder: (BuildContext context, state) {
-          if (state is FetchCurrentUserInformationSuccess) {
-            _initialUserInfo = state.userData;
-            _phoneNumber.text = _initialUserInfo.phoneNumber;
-            _fullName.text = _initialUserInfo.name ?? '';
-            _governorate.text = CommonFunctions()
-                    .getGovernorateName(_initialUserInfo.governorate)
-                    ?.tr() ??
-                '';
-            avatar = _initialUserInfo.avatar ?? '';
-          }
-          return WillPopScope(
-            onWillPop: () async {
-              context.read<ImageSelectionBloc>().add(StopImageSelection());
-              return Future.value(true);
-            },
-            child: SafeArea(
-              child: Scaffold(
-                appBar: AppBar(
-                  backgroundColor: Theme.of(context).colorScheme.primary,
-                  leading: CustomBackButton(
-                    backgroundColor: Theme.of(context).colorScheme.primary,
-                    iconColor: Colors.white,
-                    function: () {
-                      context
-                          .read<ImageSelectionBloc>()
-                          .add(StopImageSelection());
-                    },
-                  ),
-                ),
+    return BlocConsumer<UserInformationBloc, UserInformationState>(
+      listener: (BuildContext context, state) {
+        if (state is UpdateUserInformationSuccess) {
+          CommonFunctions().showSnackBar(context, 'profile updated'.tr());
+        }
+        if (state is UpdateUserInformationFailure) {
+          CommonFunctions().showDialogue(
+            context,
+            state.failure!,
+            '',
+            () {},
+            () {},
+          );
+        }
+      },
+      builder: (BuildContext context, state) {
+        if (state is FetchCurrentUserInformationSuccess) {
+          _initialUserInfo = state.userData;
+          _phoneNumber.text = _initialUserInfo.phoneNumber;
+          _fullName.text = _initialUserInfo.name ?? '';
+          _governorate.text = CommonFunctions()
+                  .getGovernorateName(_initialUserInfo.governorate)
+                  ?.tr() ??
+              '';
+          avatar = _initialUserInfo.avatar ?? '';
+        }
+        return WillPopScope(
+          onWillPop: () async {
+            context.read<ImageSelectionBloc>().add(StopImageSelection());
+            return Future.value(true);
+          },
+          child: SafeArea(
+            child: Scaffold(
+              appBar: AppBar(
                 backgroundColor: Theme.of(context).colorScheme.primary,
-                body: SingleChildScrollView(
-                  child: Form(
-                    key: _key,
-                    child: Column(
-                      children: [
-                        SizedBox(height: 18.h),
-                        Stack(
-                          clipBehavior: Clip.none,
-                          children: [
-                            _buildPageFields(
-                              context,
-                              state,
-                              isDarkMode,
-                            ),
-                            _buildUserImageAndPageInfo(
-                              context,
-                              state,
-                              isDarkMode,
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
+                leading: CustomBackButton(
+                  backgroundColor: Theme.of(context).colorScheme.primary,
+                  iconColor: Colors.white,
+                  function: () {
+                    context
+                        .read<ImageSelectionBloc>()
+                        .add(StopImageSelection());
+                  },
+                ),
+              ),
+              backgroundColor: Theme.of(context).colorScheme.primary,
+              body: SingleChildScrollView(
+                child: Form(
+                  key: _key,
+                  child: Column(
+                    children: [
+                      SizedBox(height: 18.h),
+                      Stack(
+                        clipBehavior: Clip.none,
+                        children: [
+                          _buildPageFields(
+                            context,
+                            state,
+                            isDarkMode,
+                          ),
+                          _buildUserImageAndPageInfo(
+                            context,
+                            state,
+                            isDarkMode,
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
                 ),
               ),
             ),
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 

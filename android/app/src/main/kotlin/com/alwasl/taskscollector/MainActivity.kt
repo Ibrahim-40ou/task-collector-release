@@ -1,4 +1,4 @@
-package com.example.tasks_collector
+package com.alwasl.taskscollector
 
 import io.flutter.embedding.android.FlutterActivity
 

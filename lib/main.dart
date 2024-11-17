@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+import 'package:tasks_collector/resources/core/utils/image_selection_state/image_selection_bloc.dart';
 import 'resources/core/routing/routes.dart';
 import 'resources/core/sizing/size_config.dart';
 import 'resources/core/theme/theme.dart';
@@ -60,6 +60,9 @@ void main() async {
           BlocProvider<ImageCounterCubit>(
             create: (BuildContext context) => ImageCounterCubit(),
           ),
+          BlocProvider<ImageSelectionBloc>(
+            create: (BuildContext context) => ImageSelectionBloc(),
+          ),
           BlocProvider<TasksBloc>(
             create: (BuildContext context) =>
                 TasksBloc()..add(SerializationEvent(isPagination: true)),
@@ -78,7 +81,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return BlocBuilder<ThemeBloc, ThemeState>(
       builder: (context, state) {
         return LayoutBuilder(

@@ -34,61 +34,58 @@ class RegisterPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<ImageSelectionBloc>(
-      create: (BuildContext context) => ImageSelectionBloc(),
-      child: BlocConsumer<AuthBloc, AuthState>(
-        listener: (BuildContext context, state) {
-          if (state is RegisterFailure) {
-            CommonFunctions().showDialogue(
-              context,
-              '${state.failure}',
-              '',
-              () {},
-              () {},
-            );
-          }
-          if (state is RegisterSuccess) {
-            context.read<TimerCubit>().resetTimer();
-            context.router.push(
-              OTPRoute(
-                phoneNumber: _phoneNumber.text,
-                registering: true,
-              ),
-            );
-          }
-        },
-        builder: (BuildContext context, state) {
-          return SafeArea(
-            child: Scaffold(
-              body: Padding(
-                padding: EdgeInsets.all(5.w),
-                child: Form(
-                  key: _key,
-                  child: SingleChildScrollView(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        CustomBackButton(),
-                        SizedBox(height: 2.h),
-                        _buildInformationalTexts(context),
-                        SizedBox(height: 2.h),
-                        _buildImagePicker(context),
-                        SizedBox(height: 2.h),
-                        _buildTextFields(context),
-                        SizedBox(height: 4.h),
-                        _buildRegisterButton(context, state),
-                        SizedBox(height: 2.h),
-                        _buildPageHelperText(context),
-                      ],
-                    ),
+    return BlocConsumer<AuthBloc, AuthState>(
+      listener: (BuildContext context, state) {
+        if (state is RegisterFailure) {
+          CommonFunctions().showDialogue(
+            context,
+            '${state.failure}',
+            '',
+            () {},
+            () {},
+          );
+        }
+        if (state is RegisterSuccess) {
+          context.read<TimerCubit>().resetTimer();
+          context.router.push(
+            OTPRoute(
+              phoneNumber: _phoneNumber.text,
+              registering: true,
+            ),
+          );
+        }
+      },
+      builder: (BuildContext context, state) {
+        return SafeArea(
+          child: Scaffold(
+            body: Padding(
+              padding: EdgeInsets.all(5.w),
+              child: Form(
+                key: _key,
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      CustomBackButton(),
+                      SizedBox(height: 2.h),
+                      _buildInformationalTexts(context),
+                      SizedBox(height: 2.h),
+                      _buildImagePicker(context),
+                      SizedBox(height: 2.h),
+                      _buildTextFields(context),
+                      SizedBox(height: 4.h),
+                      _buildRegisterButton(context, state),
+                      SizedBox(height: 2.h),
+                      _buildPageHelperText(context),
+                    ],
                   ),
                 ),
               ),
             ),
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 

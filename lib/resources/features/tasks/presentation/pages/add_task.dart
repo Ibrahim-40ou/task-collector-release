@@ -48,15 +48,8 @@ class AddTaskPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     _fetchLocation();
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider<ImageSelectionBloc>(
-          create: (BuildContext context) => ImageSelectionBloc(),
-        ),
-        BlocProvider<ImageDeletionCubit>(
-          create: (BuildContext context) => ImageDeletionCubit(),
-        ),
-      ],
+    return BlocProvider<ImageDeletionCubit>(
+      create: (BuildContext context) => ImageDeletionCubit(),
       child: BlocConsumer<ImageSelectionBloc, ImageSelectionState>(
         listener: (BuildContext context, state) {},
         builder: (BuildContext context, state) {
