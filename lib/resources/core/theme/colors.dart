@@ -14,10 +14,4 @@ class AppColors {
   static const Color greyLight = Color(0xFF767676);
   static const Color greyDark = Color(0xC7FFFFFF);
   static const Color error = Color(0xFFCC4743);
-  static const Color approvedDark = Color(0xFF45F14C);
-  static const Color pendingDark = Color(0xFFF1E045);
-  static const Color rejectedDark = Color(0xFFee1a1a);
-  static const Color approvedLight = Color(0xFF10db19);
-  static const Color pendingLight = Color(0xFFdbc710);
-  static const Color rejectedLight = Color(0xFFdb1010);
 }

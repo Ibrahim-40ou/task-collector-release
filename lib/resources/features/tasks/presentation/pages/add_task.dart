@@ -7,8 +7,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:tasks_collector/resources/core/routing/routes.gr.dart';
 import 'package:tasks_collector/resources/core/services/internet_services.dart';
 import 'package:tasks_collector/resources/core/sizing/size_config.dart';
 import 'package:tasks_collector/main.dart';
@@ -37,11 +39,12 @@ class AddTaskPage extends StatelessWidget {
   late String governorate;
   late String address;
   late String secondaryAddress;
-  late String lon;
-  late String lat;
+  late String lon = '';
+  late String lat = '';
   List<XFile?> images = [];
   final List<String> filesPaths = [];
   XFile? image;
+  late LatLng? latLng;
 
   AddTaskPage({super.key});
 
@@ -73,7 +76,7 @@ class AddTaskPage extends StatelessWidget {
                             SizedBox(height: 2.h),
                             _buildDescriptionField(context),
                             SizedBox(height: 2.h),
-                            _buildLocationField(),
+                            _buildLocationField(context),
                             SizedBox(height: 2.h),
                             _buildGovernorateField(context),
                             SizedBox(height: 2.h),
@@ -96,7 +99,6 @@ class AddTaskPage extends StatelessWidget {
                                 }
                               },
                               builder: (BuildContext context, addTaskState) {
-                                // context.read<InternetBloc>().add(CheckConnection());
                                 return Column(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -149,12 +151,58 @@ class AddTaskPage extends StatelessWidget {
     );
   }
 
-  Widget _buildLocationField() {
+  Widget _buildLocationField(BuildContext context) {
     return CustomField(
       controller: _location,
       labelText: 'location'.tr(),
-      enabled: false,
       validatorFunction: _validateField,
+      readOnly: true,
+      onTap: () async {
+        if (await InternetServices().isInternetAvailable()) {
+          if (await Geolocator.isLocationServiceEnabled()) {
+            if (lat.isNotEmpty && lon.isNotEmpty) {
+              LatLng? latLng = await context.router.push<LatLng?>(
+                MapRoute(
+                  currentPosition: LatLng(
+                    double.parse(lat),
+                    double.parse(lon),
+                  ),
+                  isForShow: false,
+                ),
+              );
+              if (latLng != null) {
+                getAddressFromLatLng(latLng);
+              }
+            } else {
+              CommonFunctions().showDialogue(
+                context,
+                'please wait until your current location is fetched',
+                '',
+                () {},
+                () {},
+              );
+            }
+          } else {
+            CommonFunctions().showDialogue(
+              context,
+              '',
+              'please enable location services to use the map',
+              () {},
+              () {
+                Geolocator.openLocationSettings();
+              },
+            );
+          }
+        } else {
+          CommonFunctions().showDialogue(
+            context,
+            'please connect to the internet to open the map',
+            '',
+            () {},
+            () {},
+          );
+        }
+      },
     );
   }
 
@@ -570,19 +618,7 @@ class AddTaskPage extends StatelessWidget {
       );
       Position position = await Geolocator.getCurrentPosition(
           locationSettings: locationSettings);
-      List<Placemark> placeMarks =
-          await placemarkFromCoordinates(position.latitude, position.longitude);
-      governorate = placeMarks[0].locality!;
-      address = placeMarks[0].subAdministrativeArea!;
-      secondaryAddress = placeMarks[0].street!;
-      lat = '${position.latitude}';
-      lon = '${position.longitude}';
-      _location.text = '$governorate, $address, $secondaryAddress';
-      preferences!.setString('governorateToAdd', governorate);
-      preferences!.setString('addressToAdd', address);
-      preferences!.setString('secondaryAddressToAdd', secondaryAddress);
-      preferences!.setString('latToAdd', lat);
-      preferences!.setString('lonToAdd', lon);
+      getAddressFromLatLng(LatLng(position.latitude, position.longitude));
     } else {
       governorate = preferences!.getString('governorateToAdd')!;
       address = preferences!.getString('addressToAdd')!;
@@ -591,5 +627,21 @@ class AddTaskPage extends StatelessWidget {
       lon = preferences!.getString('lonToAdd')!;
       _location.text = '$governorate, $address, $secondaryAddress';
     }
+  }
+
+  Future<void> getAddressFromLatLng(LatLng latLng) async {
+    List<Placemark> placeMarks =
+        await placemarkFromCoordinates(latLng.latitude, latLng.longitude);
+    governorate = placeMarks[0].locality!;
+    address = placeMarks[0].subAdministrativeArea!;
+    secondaryAddress = placeMarks[0].street!;
+    lat = '${latLng.latitude}';
+    lon = '${latLng.longitude}';
+    _location.text = '$governorate, $address, $secondaryAddress';
+    preferences!.setString('governorateToAdd', governorate);
+    preferences!.setString('addressToAdd', address);
+    preferences!.setString('secondaryAddressToAdd', secondaryAddress);
+    preferences!.setString('latToAdd', lat);
+    preferences!.setString('lonToAdd', lon);
   }
 }

@@ -24,6 +24,10 @@ class CustomField extends StatelessWidget {
   final Function(String?)? onChanged;
   final bool readOnly;
   final Function? onTap;
+  final Color? color;
+  final bool isLabelVisible;
+  final bool isSearch;
+  final Function? search;
 
   const CustomField({
     super.key,
@@ -45,6 +49,10 @@ class CustomField extends StatelessWidget {
     this.onChanged,
     this.readOnly = false,
     this.onTap,
+    this.isLabelVisible = true,
+    this.isSearch = false,
+    this.search,
+    this.color,
   });
 
   @override
@@ -54,15 +62,24 @@ class CustomField extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        CustomText(
-          text: labelText,
-          weight: FontWeight.bold,
-          size: CommonFunctions().englishCheck(context) ? 5.5.sp : 5.sp,
-        ),
-        SizedBox(height: 1.h),
+        if (isLabelVisible == true) ...[
+          CustomText(
+            text: labelText,
+            weight: FontWeight.bold,
+            size: CommonFunctions().englishCheck(context) ? 5.5.sp : 5.sp,
+          ),
+          SizedBox(height: 1.h)
+        ],
         SizedBox(
           width: width ?? 100.w,
           child: TextFormField(
+            onFieldSubmitted: isSearch
+                ? (String value) {
+                    if (search != null) {
+                      search!();
+                    }
+                  }
+                : (String value) {},
             maxLines: maxLines,
             minLines: 1,
             onTap: () {
@@ -76,28 +93,31 @@ class CustomField extends StatelessWidget {
             enabled: enabled,
             controller: controller,
             obscureText: showPassword,
-            textInputAction:
-                isLast ? TextInputAction.done : TextInputAction.next,
+            textInputAction: isSearch
+                ? TextInputAction.search
+                : isLast
+                    ? TextInputAction.done
+                    : TextInputAction.next,
             textCapitalization:
                 isName ? TextCapitalization.sentences : TextCapitalization.none,
             keyboardType: type,
             style: GoogleFonts.cairo(
-              color: Theme.of(context).textTheme.bodyMedium?.color,
+              color: color ?? Theme.of(context).textTheme.bodyMedium?.color,
               fontSize: 14,
             ),
             decoration: InputDecoration(
               hintText: labelText,
               hintStyle: GoogleFonts.cairo(
-                color: isDarkMode
+                color: color ?? (isDarkMode
                     ? Theme.of(context).textTheme.bodyMedium?.color
-                    : Theme.of(context).textTheme.labelMedium?.color,
+                    : Theme.of(context).textTheme.labelMedium?.color),
                 fontSize: 14,
               ),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
                 borderSide: BorderSide(
                   width: 1,
-                  color: isDarkMode ? Colors.white : Colors.black,
+                  color: color ?? (isDarkMode ? Colors.white : Colors.black),
                 ),
               ),
               focusedBorder: OutlineInputBorder(

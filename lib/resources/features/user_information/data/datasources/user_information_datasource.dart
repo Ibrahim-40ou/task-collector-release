@@ -20,7 +20,6 @@ class UserInformationDataSource {
     if (result.isSuccess && result.data != null) {
       final responseBody = jsonDecode(result.data!.body);
       final user = UserModel.fromJson(responseBody);
-      print(user.name);
       return Result<UserEntity>(data: user);
     } else {
       return Result<UserEntity>(error: result.error);

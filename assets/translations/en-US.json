@@ -114,5 +114,10 @@
   "location and description": "Location and description",
   "location" : "Location",
   "there are no tasks. try refreshing the page" : "There are no tasks. Try refreshing the page",
-  "there is no internet connection and there is not any last known location for you. try connecting to the internet" : "There is no internet connection and there is not any last known location for you. Try connecting to the internet."
+  "there is no internet connection and there is not any last known location for you. try connecting to the internet" : "There is no internet connection and there is not any last known location for you. Try connecting to the internet.",
+  "please wait until your current location is fetched" : "Please wait until your current location is fetched",
+  "search" : "Search",
+  "confirm location" : "Confirm Location",
+  "please connect to the internet to open the map. last known location will be used when there is no internet" : "Please connect to the internet to open the map. Last known location will be used when there is no internet",
+  "please enable location services to use the map" : "Please enable location services to use the map"
 }

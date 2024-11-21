@@ -6,10 +6,13 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:tasks_collector/resources/core/routing/routes.gr.dart';
 import 'package:tasks_collector/resources/core/sizing/size_config.dart';
+import 'package:tasks_collector/resources/core/widgets/button.dart';
 
+import '../../../../core/services/internet_services.dart';
 import '../../../../core/utils/common_functions.dart';
 import '../../../../core/widgets/back_button.dart';
 import '../../../../core/widgets/loading_indicator.dart';
@@ -57,16 +60,22 @@ class TaskDetailsPage extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     color: isDarkMode
-                        ? Theme.of(context).colorScheme.secondary.withOpacity(0.2)
-                        : Theme.of(context).colorScheme.secondary.withOpacity(0.4),
+                        ? Theme.of(context)
+                            .colorScheme
+                            .secondary
+                            .withOpacity(0.2)
+                        : Theme.of(context)
+                            .colorScheme
+                            .secondary
+                            .withOpacity(0.4),
                   ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       CustomText(
-                        text:
-                            '${CommonFunctions().getStatus(task.statusId)}_1'.tr(),
+                        text: '${CommonFunctions().getStatus(task.statusId)}_1'
+                            .tr(),
                         color: Theme.of(context).colorScheme.primary,
                         weight: FontWeight.w600,
                         size: 6.sp,
@@ -116,15 +125,17 @@ class TaskDetailsPage extends StatelessWidget {
                                           ? CachedNetworkImage(
                                               imageUrl: task.media[index],
                                               fit: BoxFit.cover,
-                                              placeholder: (context, url) => Center(
+                                              placeholder: (context, url) =>
+                                                  Center(
                                                 child: CustomLoadingIndicator(
                                                   color: Theme.of(context)
                                                       .colorScheme
                                                       .primary,
                                                 ),
                                               ),
-                                              errorWidget: (context, url, error) =>
-                                                  Center(
+                                              errorWidget:
+                                                  (context, url, error) =>
+                                                      Center(
                                                 child: Icon(
                                                   Icons.error,
                                                 ),
@@ -155,15 +166,18 @@ class TaskDetailsPage extends StatelessWidget {
                                       right: 2.w,
                                       child: AnimatedOpacity(
                                         opacity: opacity,
-                                        duration: const Duration(milliseconds: 300),
+                                        duration:
+                                            const Duration(milliseconds: 300),
                                         child: Container(
                                           padding: EdgeInsets.symmetric(
                                             vertical: 1.w,
                                             horizontal: 2.w,
                                           ),
                                           decoration: BoxDecoration(
-                                            color: Colors.black.withOpacity(0.5),
-                                            borderRadius: BorderRadius.circular(10),
+                                            color:
+                                                Colors.black.withOpacity(0.5),
+                                            borderRadius:
+                                                BorderRadius.circular(10),
                                           ),
                                           child: CustomText(
                                             text:
@@ -184,24 +198,54 @@ class TaskDetailsPage extends StatelessWidget {
                     ],
                   ),
                 ),
-                SizedBox(height: 1.5.h),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Iconsax.location,
-                      size: 6.w,
-                      color: Theme.of(context).textTheme.bodyMedium!.color,
-                    ),
-                    SizedBox(width: 2.w),
-                    CustomText(
-                      text:
-                          '${capitalizeFirstLetter(CommonFunctions().getGovernorateName(task.governorateId)!)}, ${task.address}',
-                    ),
-                  ],
+                SizedBox(height: 0.5.h),
+                CustomButton(
+                  function: () async {
+                    if (await InternetServices().isInternetAvailable()) {
+                      CommonFunctions().handlePermission(
+                        key: 'location',
+                        context: context,
+                        onGranted: () {
+                          context.router.push(
+                            MapRoute(
+                              currentPosition: LatLng(
+                                double.parse(task.lat),
+                                double.parse(task.lng),
+                              ),
+                              isForShow: true,
+                            ),
+                          );
+                        },
+                        isForShow: true,
+                      );
+                    } else {
+                      CommonFunctions().showDialogue(
+                        context,
+                        'please connect to the internet to open the map',
+                        '',
+                        () {},
+                        () {},
+                      );
+                    }
+                  },
+                  color: Colors.transparent,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Iconsax.location,
+                        size: 6.w,
+                        color: Theme.of(context).textTheme.bodyMedium!.color,
+                      ),
+                      SizedBox(width: 2.w),
+                      CustomText(
+                        text:
+                            '${capitalizeFirstLetter(CommonFunctions().getGovernorateName(task.governorateId)!)}, ${task.address}',
+                      ),
+                    ],
+                  ),
                 ),
-                SizedBox(height: 1.h),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.center,

@@ -17,9 +17,6 @@ import '../widgets/text.dart';
 import 'governorates.dart';
 
 class CommonFunctions {
-
-
-
   Future<String> handleLocationServices() async {
     if (await InternetServices().isInternetAvailable()) {
       if (await Geolocator.isLocationServiceEnabled()) {
@@ -36,6 +33,7 @@ class CommonFunctions {
     required String key,
     required BuildContext context,
     required Function onGranted,
+    bool isForShow = false,
   }) async {
     if (key == 'location' && await Permission.location.status.isGranted) {
       if (await handleLocationServices() == 'on') {
@@ -44,7 +42,9 @@ class CommonFunctions {
         showDialogue(
           context,
           '',
-          'to add a task, please turn on location services',
+          isForShow
+              ? 'please enable location services to use the map'
+              : 'to add a task, please turn on location services',
           () {},
           () {
             Geolocator.openLocationSettings();
@@ -55,11 +55,9 @@ class CommonFunctions {
       }
       return;
     } else if (key == 'camera' && await Permission.camera.status.isGranted) {
-      print('humbargarriah');
       onGranted();
       return;
     } else if (key == 'photos' && await Permission.photos.status.isGranted) {
-      print('humbargarriah2222');
       onGranted();
       return;
     }
@@ -84,11 +82,9 @@ class CommonFunctions {
           }
         } else if (key == 'camera') {
           if (await Permission.camera.status.isPermanentlyDenied) {
-            print('pizzaaaaaaa');
             openAppSettings();
             return;
           } else {
-            print('owely yaba');
             Permission.camera.request();
             return;
           }
@@ -209,8 +205,21 @@ class CommonFunctions {
       return 'phone number already in use. please use a different one.'.tr();
     } else if (error.contains('The OTP is invalid or has expired.')) {
       return 'the OTP is invalid or has expired'.tr();
-    } else if (error.contains('there is no internet connection and there is not any last known location')) {
-      return 'there is no internet connection and there is not any last known location for you. try connecting to the internet'.tr();
+    } else if (error.contains(
+        'there is no internet connection and there is not any last known location')) {
+      return 'there is no internet connection and there is not any last known location for you. try connecting to the internet'
+          .tr();
+    } else if (error
+        .contains('please wait until your current location is fetched')) {
+      return 'please wait until your current location is fetched'.tr();
+    } else if (error.contains('reset by peer')) {
+      return 'a network error has occurred. please try again later.'.tr();
+    } else if (error
+        .contains('please connect to the internet to open the map')) {
+      return 'please connect to the internet to open the map. last known location will be used when there is no internet'
+          .tr();
+    } else if (error.contains('location is off')) {
+      return 'please enable location services to use the map'.tr();
     } else {
       return 'unknown error occurred. please try again later'.tr();
     }

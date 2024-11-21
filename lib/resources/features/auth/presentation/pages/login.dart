@@ -23,7 +23,6 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(context.router.current.name);
     return BlocConsumer<AuthBloc, AuthState>(
       listener: (BuildContext context, state) {
         if (state is SendOTPFailure) {

@@ -114,5 +114,10 @@
   "location and description": "العنوان والوصف",
   "location": "الموقع",
   "there are no tasks. try refreshing the page": "لا توجد اي مهام. حاول تحديث الصفحة",
-  "there is no internet connection and there is not any last known location for you. try connecting to the internet": "لا يوجد انترنت ولا يوجد اية اخر موقع معروف لك. حاول الاتصال بالانترنت"
+  "there is no internet connection and there is not any last known location for you. try connecting to the internet": "لا يوجد انترنت ولا يوجد اية اخر موقع معروف لك. حاول الاتصال بالانترنت",
+  "please wait until your current location is fetched" : "الرجاء الانتظار الى حين جلب موقعك الحالي",
+  "search" : "بحث",
+  "confirm location" : "تأكيد الموقع",
+  "please connect to the internet to open the map. last known location will be used when there is no internet" : "الرجاء الاتصال بالانترنت لاستخدام الخريطة. سنستعمل اخر موقع معروف عند عدم الاتصال بالانترنت",
+  "please enable location services to use the map" : "الرجاء تفعيل خدمات الموقع لاستخدام الخريطة"
 }

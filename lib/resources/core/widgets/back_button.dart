@@ -9,18 +9,24 @@ class CustomBackButton extends StatelessWidget {
   final Color? backgroundColor;
   final Color? iconColor;
   final Function? function;
+  final bool isMap;
 
   const CustomBackButton({
     super.key,
     this.backgroundColor,
     this.iconColor,
     this.function,
+    this.isMap = false,
   });
 
   @override
   Widget build(BuildContext context) {
     return CustomButton(
       function: () {
+        if(isMap) {
+          function!();
+          return;
+        }
         context.router.popForced(true);
         if (function != null) {
           function!();
@@ -29,7 +35,7 @@ class CustomBackButton extends StatelessWidget {
       color: backgroundColor != null
           ? backgroundColor!
           : Theme.of(context).colorScheme.secondary.withOpacity(0.2),
-      width: 12.w,
+      width: 6.h,
       height: 6.h,
       child: Icon(
         CupertinoIcons.back,

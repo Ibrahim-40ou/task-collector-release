@@ -5,11 +5,10 @@ import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import 'package:iconsax/iconsax.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:tasks_collector/resources/core/routing/routes.gr.dart';
 import 'package:tasks_collector/resources/core/services/internet_services.dart';
 import 'package:tasks_collector/resources/core/sizing/size_config.dart';
@@ -243,7 +242,7 @@ class TasksPage extends StatelessWidget {
             child: Padding(
               padding: EdgeInsets.symmetric(vertical: 0.5.h, horizontal: 2.w),
               child: Container(
-                padding: EdgeInsets.symmetric(vertical: 1.h, horizontal: 2.5.w),
+                padding: EdgeInsets.only(top: 1.h, left: 2.5.w, right: 2.5.w),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   color: isDarkMode
@@ -331,7 +330,6 @@ class TasksPage extends StatelessWidget {
                       size: 5.sp,
                     ),
                     SizedBox(height: 1.h),
-
                     SizedBox(
                       height: 25.h,
                       width: 100.w,
@@ -436,28 +434,60 @@ class TasksPage extends StatelessWidget {
                         ],
                       ),
                     ),
-                    SizedBox(height: 1.h),
-                    // Location and Date Row
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Iconsax.location,
-                              size: 5.w,
-                              color:
-                                  Theme.of(context).textTheme.bodyMedium!.color,
-                            ),
-                            SizedBox(width: 2.w),
-                            CustomText(
-                              text: tasks[index].address,
-                              size: 4.5.sp,
-                            ),
-                          ],
+                        CustomButton(
+                          function: () async {
+                            if (await InternetServices()
+                                .isInternetAvailable()) {
+                              CommonFunctions().handlePermission(
+                                key: 'location',
+                                context: context,
+                                onGranted: () {
+                                  context.router.push(
+                                    MapRoute(
+                                      currentPosition: LatLng(
+                                        double.parse(tasks[index].lat),
+                                        double.parse(tasks[index].lng),
+                                      ),
+                                      isForShow: true,
+                                    ),
+                                  );
+                                },
+                                isForShow: true,
+                              );
+                            } else {
+                              CommonFunctions().showDialogue(
+                                context,
+                                'please connect to the internet to open the map',
+                                '',
+                                () {},
+                                () {},
+                              );
+                            }
+                          },
+                          color: Colors.transparent,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Iconsax.location,
+                                size: 5.w,
+                                color: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium!
+                                    .color,
+                              ),
+                              SizedBox(width: 2.w),
+                              CustomText(
+                                text: tasks[index].address,
+                                size: 4.5.sp,
+                              ),
+                            ],
+                          ),
                         ),
                         CustomText(
                           text: _formatDate(tasks[index].date),

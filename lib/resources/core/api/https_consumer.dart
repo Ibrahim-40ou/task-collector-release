@@ -35,10 +35,11 @@ class HttpsConsumer {
   Future<Result<http.Response>> get({
     required String endpoint,
     Map<String, String>? headers,
+    bool isMapSearch = false,
   }) async {
     return _sendRequest(
       () => http.get(
-        Uri.parse('$baseUrl$endpoint'),
+        Uri.parse(isMapSearch ? endpoint : '$baseUrl$endpoint'),
         headers: _generateHeaders(headers),
       ),
     );
