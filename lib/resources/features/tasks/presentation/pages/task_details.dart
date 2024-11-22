@@ -198,7 +198,7 @@ class TaskDetailsPage extends StatelessWidget {
                     ],
                   ),
                 ),
-                SizedBox(height: 0.5.h),
+                SizedBox(height: 1.h),
                 CustomButton(
                   function: () async {
                     if (await InternetServices().isInternetAvailable()) {
@@ -239,13 +239,17 @@ class TaskDetailsPage extends StatelessWidget {
                         color: Theme.of(context).textTheme.bodyMedium!.color,
                       ),
                       SizedBox(width: 2.w),
-                      CustomText(
-                        text:
-                            '${capitalizeFirstLetter(CommonFunctions().getGovernorateName(task.governorateId)!)}, ${task.address}',
+                      SizedBox(
+                        width: 80.w,
+                        child: CustomText(
+                          text: task.address,
+                          // overflow: TextOverflow,
+                        ),
                       ),
                     ],
                   ),
                 ),
+                SizedBox(height: 1.h),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.center,

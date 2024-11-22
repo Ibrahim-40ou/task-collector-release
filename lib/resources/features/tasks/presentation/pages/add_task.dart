@@ -564,7 +564,7 @@ class AddTaskPage extends StatelessWidget {
                 AddTask(
                   task: TaskModel(
                     id: _generateUniqueId(),
-                    description: _description.text,
+                    description: _description.text.trim(),
                     address: '$governorate, $address, $secondaryAddress',
                     governorateId: CommonFunctions()
                             .getGovernorateNumber(_governorate.text, context) ??

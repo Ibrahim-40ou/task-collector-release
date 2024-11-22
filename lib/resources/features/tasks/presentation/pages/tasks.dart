@@ -481,10 +481,13 @@ class TasksPage extends StatelessWidget {
                                     .bodyMedium!
                                     .color,
                               ),
-                              SizedBox(width: 2.w),
-                              CustomText(
-                                text: tasks[index].address,
-                                size: 4.5.sp,
+                              ConstrainedBox(
+                                constraints: BoxConstraints(maxWidth: 70.w),
+                                child: CustomText(
+                                  text: tasks[index].address,
+                                  size: 4.5.sp,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
                               ),
                             ],
                           ),
@@ -494,7 +497,7 @@ class TasksPage extends StatelessWidget {
                           size: 4.5.sp,
                         ),
                       ],
-                    ),
+                    )
                   ],
                 ),
               ),
