@@ -13,6 +13,7 @@ ThemeData light = ThemeData(
     tertiary: AppColors.accentLight,
     onTertiary: Colors.white,
     error: AppColors.error,
+    onSurface: Colors.black,
   ),
   textTheme: const TextTheme(
     bodyMedium: TextStyle(
@@ -41,6 +42,7 @@ ThemeData dark = ThemeData(
     tertiary: AppColors.accentDark,
     onTertiary: Colors.white,
     error: AppColors.error,
+    onSurface: Colors.white,
   ),
   textTheme: const TextTheme(
     bodyMedium: TextStyle(

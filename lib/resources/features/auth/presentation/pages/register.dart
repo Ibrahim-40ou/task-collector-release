@@ -56,29 +56,39 @@ class RegisterPage extends StatelessWidget {
         }
       },
       builder: (BuildContext context, state) {
-        return SafeArea(
-          child: Scaffold(
-            body: Padding(
-              padding: EdgeInsets.all(5.w),
-              child: Form(
-                key: _key,
-                child: SingleChildScrollView(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      CustomBackButton(),
-                      SizedBox(height: 2.h),
-                      _buildInformationalTexts(context),
-                      SizedBox(height: 2.h),
-                      _buildImagePicker(context),
-                      SizedBox(height: 2.h),
-                      _buildTextFields(context),
-                      SizedBox(height: 4.h),
-                      _buildRegisterButton(context, state),
-                      SizedBox(height: 2.h),
-                      _buildPageHelperText(context),
-                    ],
+        return WillPopScope(
+          onWillPop: () async {
+            context.read<ImageSelectionBloc>().add(StopImageSelection());
+            return Future.value(true);
+          },
+          child: SafeArea(
+            child: Scaffold(
+              body: Padding(
+                padding: EdgeInsets.all(5.w),
+                child: Form(
+                  key: _key,
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        CustomBackButton(
+                          function: () {
+                            context.read<ImageSelectionBloc>().add(StopImageSelection());
+                          },
+                        ),
+                        SizedBox(height: 2.h),
+                        _buildInformationalTexts(context),
+                        SizedBox(height: 2.h),
+                        _buildImagePicker(context),
+                        SizedBox(height: 2.h),
+                        _buildTextFields(context),
+                        SizedBox(height: 4.h),
+                        _buildRegisterButton(context, state),
+                        SizedBox(height: 2.h),
+                        _buildPageHelperText(context),
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -137,6 +147,7 @@ class RegisterPage extends StatelessWidget {
                                     selectedImages: [_selectedImage],
                                   ),
                                 );
+                            context.router.popForced();
                           },
                         );
                       },
@@ -182,6 +193,7 @@ class RegisterPage extends StatelessWidget {
                                     selectedImages: [_selectedImage],
                                   ),
                                 );
+                            context.router.popForced();
                           },
                         );
                       },
@@ -393,6 +405,7 @@ class RegisterPage extends StatelessWidget {
         ),
         GestureDetector(
           onTap: () {
+            context.read<ImageSelectionBloc>().add(StopImageSelection());
             context.router.popForced();
           },
           child: CustomText(

@@ -220,6 +220,13 @@ class CommonFunctions {
           .tr();
     } else if (error.contains('location is off')) {
       return 'please enable location services to use the map'.tr();
+    } else if (error
+        .contains('The media.1 field must be a file of type: jpg, jpeg')) {
+      return 'the image format for the selected photos is not supported. please use a different format'
+          .tr();
+    } else if (error.contains("Data too long for column 'description'")) {
+      return 'description field data is too long. please use a shortened description for the task'
+          .tr();
     } else {
       return 'unknown error occurred. please try again later'.tr();
     }
