@@ -83,8 +83,7 @@ class AddTaskPage extends StatelessWidget {
                             BlocConsumer<TasksBloc, TasksStates>(
                               listener: (BuildContext context, addTaskState) {
                                 if (addTaskState is AddTaskFailure) {
-                                  print('hehe');
-                                  print(addTaskState.failure!);
+
                                   CommonFunctions().showDialogue(
                                     context,
                                     addTaskState.failure!,
