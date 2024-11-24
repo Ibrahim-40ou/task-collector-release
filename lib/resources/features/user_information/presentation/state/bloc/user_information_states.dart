@@ -28,3 +28,5 @@ class UpdateUserInformationFailure extends UserInformationState {
 
   UpdateUserInformationFailure({required this.failure});
 }
+
+class UserLogoutSuccess extends UserInformationState {}

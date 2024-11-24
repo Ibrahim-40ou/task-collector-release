@@ -64,8 +64,12 @@ void main() async {
             create: (BuildContext context) => ImageSelectionBloc(),
           ),
           BlocProvider<TasksBloc>(
-            create: (BuildContext context) =>
-                TasksBloc()..add(SerializationEvent(isPagination: true)),
+            create: (BuildContext context) => TasksBloc()
+              ..add(
+                SerializationEvent(
+                  isPagination: true,
+                ),
+              ),
           ),
         ],
         child: MyApp(),

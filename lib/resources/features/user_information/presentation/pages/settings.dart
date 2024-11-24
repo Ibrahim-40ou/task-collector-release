@@ -6,8 +6,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:tasks_collector/main.dart';
 import 'package:tasks_collector/resources/core/sizing/size_config.dart';
+
 import '../../../../core/routing/routes.gr.dart';
 import '../../../../core/utils/common_functions.dart';
 import '../../../../core/widgets/button.dart';
@@ -208,13 +208,11 @@ class SettingsPage extends StatelessWidget {
               ),
               SizedBox(height: 1.h),
               BlocListener<AuthBloc, AuthState>(
-                listener: (context, state) {
+                listener: (context, state) async {
                   if (state is LogoutSuccess) {
                     context.router.replaceAll([InitialRoute()]);
-                    preferences!.clear();
                   }
                   if (state is LogoutFailure) {
-
                     CommonFunctions().showDialogue(
                       context,
                       state.failure!,

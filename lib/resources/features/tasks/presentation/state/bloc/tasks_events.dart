@@ -41,3 +41,4 @@ class SerializationEvent extends TasksEvents {
   });
 }
 
+class TasksLogout extends TasksEvents {}

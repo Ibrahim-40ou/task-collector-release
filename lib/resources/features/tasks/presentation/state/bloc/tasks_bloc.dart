@@ -31,6 +31,14 @@ class TasksBloc extends Bloc<TasksEvents, TasksStates> {
     on<UploadOfflineTasks>(_upload);
     on<DeleteOfflineTasks>(_delete);
     on<SerializationEvent>(_serialize);
+    on<TasksLogout>(_logout);
+  }
+
+  Future<void> _logout(
+    TasksLogout event,
+    Emitter<TasksStates> emit,
+  ) async {
+    tasks.clear();
   }
 
   void incrementPerPage() {
@@ -107,7 +115,6 @@ class TasksBloc extends Bloc<TasksEvents, TasksStates> {
     SerializationEvent event,
     Emitter<TasksStates> emit,
   ) async {
-    DatabaseHelper().printAllTasks();
     await _upload(UploadOfflineTasks(), emit);
     await _delete(DeleteOfflineTasks(), emit);
     await _paginatedFetch(

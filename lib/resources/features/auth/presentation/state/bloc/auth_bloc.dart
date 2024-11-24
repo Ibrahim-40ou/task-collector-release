@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/api/https_consumer.dart';
+import '../../../../../core/cache/database_helper.dart';
 import '../../../../../core/utils/result.dart';
 import '../../../../../../main.dart';
 import '../../../data/datasources/auth_datasource.dart';
@@ -57,12 +58,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   Future<void> _logout(LogoutRequest event, Emitter<AuthState> emit) async {
     emit(LogoutLoading());
-    preferences!.setBool('loggedIn', false);
-    preferences!.setString('token', '');
-    preferences!.remove('name');
-    preferences!.remove('governorate_id');
-    preferences!.remove('phone_number');
-    preferences!.remove('avatar');
+    await preferences!.clear();
+    await DatabaseHelper().deleteAllTasks();
+    await DatabaseHelper().deleteAllWaitingTasks();
+    await DatabaseHelper().deleteAllDeletedTasks();
     emit(LogoutSuccess());
   }
 

@@ -20,3 +20,5 @@ class UpdateUserInformation extends UserInformationEvent {
 }
 
 class SerializationUserEvent extends UserInformationEvent {}
+
+class UserLogoutEvent extends UserInformationEvent {}

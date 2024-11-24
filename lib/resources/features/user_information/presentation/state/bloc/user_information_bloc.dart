@@ -29,6 +29,7 @@ class UserInformationBloc
     on<FetchCurrentUserInformation>(_fetchCurrentUserInformation);
     on<UpdateUserInformation>(_updateUserInformation);
     on<SerializationUserEvent>(_serialize);
+    on<UserLogoutEvent>(_logout);
   }
 
   @override
@@ -38,6 +39,18 @@ class UserInformationBloc
     if (kDebugMode) {
       print(change);
     }
+  }
+
+  Future<void> _logout(
+    UserLogoutEvent event,
+    Emitter<UserInformationState> emit,
+  ) async {
+    userInfo = UserEntity(
+      name: '',
+      phoneNumber: '',
+      governorate: '',
+      avatar: '',
+    );
   }
 
   Future<void> _serialize(
