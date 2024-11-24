@@ -121,5 +121,7 @@
   "please connect to the internet to open the map. last known location will be used when there is no internet" : "Please connect to the internet to open the map. Last known location will be used when there is no internet",
   "please enable location services to use the map" : "Please enable location services to use the map",
   "the image format for the selected photos is not supported. please use a different format" : "The image format for the selected photos is not supported. Please use a different format",
-  "description field data is too long. please use a shortened description for the task" : "Description field data is too long. Please use a shortened description for the task"
+  "description field data is too long. please use a shortened description for the task" : "Description field data is too long. Please use a shortened description for the task",
+  "this task has been uploaded online" : "This task has been uploaded online",
+  "this task has not been uploaded online yet" : "This task has not been uploaded online yet"
 }

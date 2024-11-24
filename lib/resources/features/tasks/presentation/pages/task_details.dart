@@ -265,6 +265,18 @@ class TaskDetailsPage extends StatelessWidget {
                     ),
                   ],
                 ),
+                SizedBox(height: 1.h),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    _getUploadStatusIcon(task.uploadStatus, context),
+                    SizedBox(width: 2.w),
+                    CustomText(
+                      text: task.uploadStatus == 'waiting' ? 'this task has not been uploaded online yet'.tr() : 'this task has been uploaded online'.tr(),
+                    ),
+                  ],
+                ),
               ],
             ),
           ),
@@ -281,5 +293,29 @@ class TaskDetailsPage extends StatelessWidget {
   String capitalizeFirstLetter(String word) {
     if (word.isEmpty) return word;
     return word[0].toUpperCase() + word.substring(1);
+  }
+
+  Widget _getUploadStatusIcon(String status, BuildContext context) {
+    switch (status) {
+      case 'uploaded':
+        return Icon(
+          Icons.done_all,
+          size: 6.w,
+          color: Theme.of(context).textTheme.bodyMedium!.color!,
+        );
+      case 'waiting':
+        return Icon(
+          Icons.check,
+          size: 6.w,
+          color: Theme.of(context).textTheme.bodyMedium!.color!,
+        );
+
+      default:
+        return Icon(
+          Icons.done_all,
+          size: 6.w,
+          color: Theme.of(context).textTheme.bodyMedium!.color!,
+        );
+    }
   }
 }

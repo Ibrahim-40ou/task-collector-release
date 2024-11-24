@@ -260,13 +260,29 @@ class TasksPage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        CustomText(
-                          text:
-                              '${CommonFunctions().getStatus(tasks[index].statusId)}_1'
-                                  .tr(),
-                          color: Theme.of(context).colorScheme.primary,
-                          weight: FontWeight.w600,
-                          size: 6.sp,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            CustomText(
+                              text:
+                                  '${CommonFunctions().getStatus(tasks[index].statusId)}_1'
+                                      .tr(),
+                              color: Theme.of(context).colorScheme.primary,
+                              weight: FontWeight.w600,
+                              size: 6.sp,
+                            ),
+                            CustomText(
+                              text: ' | ',
+                              color: Theme.of(context).colorScheme.primary,
+                              weight: FontWeight.w600,
+                              size: 6.sp,
+                            ),
+                            _getUploadStatusIcon(
+                              tasks[index].uploadStatus,
+                              context,
+                            ),
+                          ],
                         ),
                         SizedBox(
                           height: 2.h,
@@ -531,6 +547,30 @@ class TasksPage extends StatelessWidget {
       }
     } catch (e) {
       return 'Invalid date';
+    }
+  }
+
+  Widget _getUploadStatusIcon(String status, BuildContext context) {
+    switch (status) {
+      case 'uploaded':
+        return Icon(
+          Icons.done_all,
+          size: 6.w,
+          color: Theme.of(context).colorScheme.primary,
+        );
+      case 'waiting':
+        return Icon(
+          Icons.check,
+          size: 6.w,
+          color: Theme.of(context).colorScheme.primary,
+        );
+
+      default:
+        return Icon(
+          Icons.done_all,
+          size: 6.w,
+          color: Theme.of(context).colorScheme.primary,
+        );
     }
   }
 }

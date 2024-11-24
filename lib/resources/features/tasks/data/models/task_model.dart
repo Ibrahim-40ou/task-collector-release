@@ -11,6 +11,7 @@ class TaskModel extends TaskEntity {
     required super.lat,
     required super.lng,
     required super.statusId,
+    required super.uploadStatus,
   });
 
   factory TaskModel.fromJson(Map<String, dynamic> json) {
@@ -26,6 +27,7 @@ class TaskModel extends TaskEntity {
           .map((item) => item['path'] as String)
           .toList(),
       statusId: json['status_id'],
+      uploadStatus: '',
     );
   }
 

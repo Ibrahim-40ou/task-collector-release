@@ -83,6 +83,7 @@ class DatabaseHelper {
           date: maps[i]['date'],
           media: maps[i]['media'].split(','),
           statusId: maps[i]['statusId'],
+          uploadStatus: maps[i]['uploadStatus'],
         );
       },
     );
@@ -119,6 +120,7 @@ class DatabaseHelper {
           date: maps[i]['date'],
           media: maps[i]['media'].split(','),
           statusId: maps[i]['statusId'],
+          uploadStatus: maps[i]['uploadStatus'],
         );
       },
     );
@@ -145,6 +147,7 @@ class DatabaseHelper {
           date: maps[i]['date'],
           media: maps[i]['media'].split(','),
           statusId: maps[i]['statusId'],
+          uploadStatus: maps[i]['uploadStatus'],
         );
       },
     );

@@ -83,7 +83,6 @@ class AddTaskPage extends StatelessWidget {
                             BlocConsumer<TasksBloc, TasksStates>(
                               listener: (BuildContext context, addTaskState) {
                                 if (addTaskState is AddTaskFailure) {
-
                                   CommonFunctions().showDialogue(
                                     context,
                                     addTaskState.failure!,
@@ -575,6 +574,9 @@ class AddTaskPage extends StatelessWidget {
                     lat: lat,
                     lng: lon,
                     statusId: 1,
+                    uploadStatus: await InternetServices().isInternetAvailable()
+                        ? ''
+                        : 'waiting',
                   ),
                 ),
               );

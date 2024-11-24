@@ -8,6 +8,7 @@ class TaskEntity {
   late String date;
   late List<String> media;
   late int statusId;
+  late String uploadStatus;
 
   TaskEntity({
     required this.id,
@@ -19,5 +20,6 @@ class TaskEntity {
     required this.date,
     required this.media,
     required this.statusId,
+    required this.uploadStatus,
   });
 }

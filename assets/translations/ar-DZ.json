@@ -121,5 +121,7 @@
   "please connect to the internet to open the map. last known location will be used when there is no internet" : "الرجاء الاتصال بالانترنت لاستخدام الخريطة. سنستعمل اخر موقع معروف عند عدم الاتصال بالانترنت",
   "please enable location services to use the map" : "الرجاء تفعيل خدمات الموقع لاستخدام الخريطة",
   "the image format for the selected photos is not supported. please use a different format" : "صيغة الصورة للصور المحددة غير مدعومة. الرجاء استعمال صور مختلفة",
-  "description field data is too long. please use a shortened description for the task" : "الوصف المستعمل طويل للغاية. الرجاء وصف المهمة باختصار اكثر"
+  "description field data is too long. please use a shortened description for the task" : "الوصف المستعمل طويل للغاية. الرجاء وصف المهمة باختصار اكثر",
+  "this task has been uploaded online" : "هذه المهمة لم ترفع الى الانترنت",
+  "this task has not been uploaded online yet" : "تم رفع هذه المهمة الى الانترنت"
 }
