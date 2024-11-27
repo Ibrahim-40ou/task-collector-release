@@ -21,7 +21,6 @@ class TaskDetailsBloc extends Bloc<TaskDetailsEvent, TaskDetailsStates> {
 
   @override
   void onChange(Change<TaskDetailsStates> change) {
-    // TODO: implement onChange
     super.onChange(change);
     if (kDebugMode) {
       print(change);
@@ -49,6 +48,5 @@ class TaskDetailsBloc extends Bloc<TaskDetailsEvent, TaskDetailsStates> {
     } else {
       return emit(FetchTaskByIDFailure(failure: 'no internet connection'.tr()));
     }
-
   }
 }

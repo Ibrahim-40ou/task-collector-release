@@ -74,7 +74,9 @@ class RegisterPage extends StatelessWidget {
                       children: [
                         CustomBackButton(
                           function: () {
-                            context.read<ImageSelectionBloc>().add(StopImageSelection());
+                            context
+                                .read<ImageSelectionBloc>()
+                                .add(StopImageSelection());
                           },
                         ),
                         SizedBox(height: 2.h),

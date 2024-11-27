@@ -10,7 +10,6 @@ class EndPoints {
   static const String perPage = "complaint?per_page=";
   static const String predictionsBaseURL =
       "https://maps.googleapis.com/maps/api/place/autocomplete/json?components=country:IQ";
-  // TODO:
   static const String predictionsDetailsBaseURL =
       "https://maps.googleapis.com/maps/api/place/details/json";
 }

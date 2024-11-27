@@ -2,7 +2,6 @@ import 'package:tasks_collector/resources/features/map/data/repositories/map_rep
 
 import '../../../../core/utils/result.dart';
 
-
 class FetchCoordinatesUseCase {
   final MapRepositoryImpl mapRepositoryImpl;
 

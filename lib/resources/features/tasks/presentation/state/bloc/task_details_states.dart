@@ -4,7 +4,6 @@ sealed class TaskDetailsStates {}
 
 class TaskDetailsInitial extends TaskDetailsStates {}
 
-
 class FetchTaskByIDLoading extends TaskDetailsStates {}
 
 class FetchTaskByIDSuccess extends TaskDetailsStates {

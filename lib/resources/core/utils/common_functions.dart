@@ -17,6 +17,54 @@ import '../widgets/text.dart';
 import 'governorates.dart';
 
 class CommonFunctions {
+  String formatDate(String isoDateString) {
+    try {
+      DateTime dateTime = DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'")
+          .parseUTC(isoDateString)
+          .toLocal();
+      DateTime now = DateTime.now();
+
+      Duration difference = now.difference(dateTime);
+      int daysDifference = difference.inDays;
+
+      if (dateTime.year == now.year) {
+        if (daysDifference == 0) {
+          return DateFormat.jm().format(dateTime);
+        } else if (daysDifference > 0 && daysDifference <= 7) {
+          return DateFormat.E().format(dateTime);
+        } else {
+          return DateFormat.MMMd().format(dateTime);
+        }
+      } else {
+        return '${dateTime.year}, ${DateFormat.MMM().format(dateTime)} ${dateTime.day}';
+      }
+    } catch (e) {
+      return 'Invalid date';
+    }
+  }
+  Widget getUploadStatusIcon(String status, BuildContext context) {
+    switch (status) {
+      case 'uploaded':
+        return Icon(
+          Icons.done_all,
+          size: 6.w,
+          color: Theme.of(context).colorScheme.primary,
+        );
+      case 'waiting':
+        return Icon(
+          Icons.check,
+          size: 6.w,
+          color: Theme.of(context).colorScheme.primary,
+        );
+
+      default:
+        return Icon(
+          Icons.done_all,
+          size: 6.w,
+          color: Theme.of(context).colorScheme.primary,
+        );
+    }
+  }
   Future<String> handleLocationServices() async {
     if (await InternetServices().isInternetAvailable()) {
       if (await Geolocator.isLocationServiceEnabled()) {

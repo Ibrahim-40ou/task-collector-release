@@ -1,8 +1,11 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tasks_collector/firebase_options.dart';
 import 'package:tasks_collector/resources/core/utils/image_selection_state/image_selection_bloc.dart';
 import 'resources/core/routing/routes.dart';
 import 'resources/core/sizing/size_config.dart';
@@ -23,6 +26,9 @@ void main() async {
   await EasyLocalization.ensureInitialized();
   preferences = await SharedPreferences.getInstance();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(
     EasyLocalization(
       supportedLocales: const [
@@ -64,12 +70,8 @@ void main() async {
             create: (BuildContext context) => ImageSelectionBloc(),
           ),
           BlocProvider<TasksBloc>(
-            create: (BuildContext context) => TasksBloc()
-              ..add(
-                SerializationEvent(
-                  isPagination: true,
-                ),
-              ),
+            create: (BuildContext context) =>
+                TasksBloc()..add(SerializationEvent()),
           ),
         ],
         child: MyApp(),
@@ -102,7 +104,23 @@ class MyApp extends StatelessWidget {
               localizationsDelegates: context.localizationDelegates,
               supportedLocales: context.supportedLocales,
               locale: context.locale,
-              routerConfig: appRouter.config(),
+              routerConfig: appRouter.config(
+                deepLinkBuilder: (deepLink) {
+                  if (deepLink.path
+                      .startsWith('/app/tasksNavigator/details/')) {
+                    if (preferences!.getBool('loggedIn') != true) {
+                      preferences!
+                          .setString('deepLink', deepLink.path.split('/').last);
+                      return DeepLink.defaultPath;
+                    } else {
+                      // DeepLink([AppRoute()]);
+                      return deepLink;
+                    }
+                  } else {
+                    return DeepLink.defaultPath;
+                  }
+                },
+              ),
               theme: light,
               darkTheme: dark,
               themeMode: isDarkMode ? ThemeMode.dark : ThemeMode.light,

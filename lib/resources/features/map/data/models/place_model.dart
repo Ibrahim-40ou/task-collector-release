@@ -15,8 +15,8 @@ class PlaceModel extends PlaceEntity {
 
   Map<String, dynamic> toJson() {
     return {
-      'place_name' : placeName,
-      'place_id' : placeID,
+      'place_name': placeName,
+      'place_id': placeID,
     };
   }
 }

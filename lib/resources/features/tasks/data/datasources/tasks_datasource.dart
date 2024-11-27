@@ -14,21 +14,6 @@ class TasksDatasource {
 
   TasksDatasource({required this.httpsConsumer});
 
-  Future<Result<List<TaskEntity>>> fetchTasks() async {
-    late List<TaskEntity> tasks = [];
-    final result = await httpsConsumer.get(
-        endpoint: '${EndPoints.complaint}?include=media');
-    if (result.isSuccess && result.data != null) {
-      final responseBody = jsonDecode(result.data!.body);
-      for (Map<String, dynamic> task in responseBody['data']) {
-        tasks.add(TaskModel.fromJson(task));
-      }
-      return Result<List<TaskEntity>>(data: tasks);
-    } else {
-      return Result<List<TaskEntity>>(error: result.error);
-    }
-  }
-
   Future<Result<TaskEntity>> fetchTaskByID(String id) async {
     late TaskEntity task;
     final result = await httpsConsumer.get(

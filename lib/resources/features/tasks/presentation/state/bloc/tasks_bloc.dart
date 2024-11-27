@@ -49,65 +49,34 @@ class TasksBloc extends Bloc<TasksEvents, TasksStates> {
     PaginatedFetchTasks event,
     Emitter<TasksStates> emit,
   ) async {
-    if (event.isPagination) {
-      emit(FetchTasksLoading());
-      if (await InternetServices().isInternetAvailable()) {
-        final Result result = await PaginatedFetchUseCase(
-          tasksRepositoryImpl: TasksRepositoryImpl(
-            tasksDatasource: TasksDatasource(
-              httpsConsumer: HttpsConsumer(),
-            ),
-          ),
-        ).call(perPage);
-        incrementPerPage();
-        if (result.isSuccess) {
-          tasks = result.data;
-          await LocalTasksDatasource(
-            databaseHelper: DatabaseHelper(),
-            imageService: ImageService(),
+    emit(FetchTasksLoading());
+    if (await InternetServices().isInternetAvailable()) {
+      final Result result = await PaginatedFetchUseCase(
+        tasksRepositoryImpl: TasksRepositoryImpl(
+          tasksDatasource: TasksDatasource(
             httpsConsumer: HttpsConsumer(),
-          ).storeTasks(tasks);
-          return emit(FetchTasksSuccess(tasks: tasks));
-        } else {
-          return emit(FetchTasksFailure(failure: result.error));
-        }
-      } else {
-        tasks = await LocalTasksDatasource(
+          ),
+        ),
+      ).call(perPage);
+      incrementPerPage();
+      if (result.isSuccess) {
+        tasks = result.data;
+        await LocalTasksDatasource(
           databaseHelper: DatabaseHelper(),
           imageService: ImageService(),
           httpsConsumer: HttpsConsumer(),
-        ).fetchTasks();
+        ).storeTasks(tasks);
         return emit(FetchTasksSuccess(tasks: tasks));
+      } else {
+        return emit(FetchTasksFailure(failure: result.error));
       }
     } else {
-      emit(FetchTasksLoading());
-      if (await InternetServices().isInternetAvailable()) {
-        final Result result = await PaginatedFetchUseCase(
-          tasksRepositoryImpl: TasksRepositoryImpl(
-            tasksDatasource: TasksDatasource(
-              httpsConsumer: HttpsConsumer(),
-            ),
-          ),
-        ).call(3);
-        if (result.isSuccess) {
-          tasks = result.data;
-          await LocalTasksDatasource(
-            databaseHelper: DatabaseHelper(),
-            imageService: ImageService(),
-            httpsConsumer: HttpsConsumer(),
-          ).storeTasks(tasks);
-          return emit(FetchTasksSuccess(tasks: tasks));
-        } else {
-          return emit(FetchTasksFailure(failure: result.error));
-        }
-      } else {
-        tasks = await LocalTasksDatasource(
-          databaseHelper: DatabaseHelper(),
-          imageService: ImageService(),
-          httpsConsumer: HttpsConsumer(),
-        ).fetchTasks();
-        return emit(FetchTasksSuccess(tasks: tasks));
-      }
+      tasks = await LocalTasksDatasource(
+        databaseHelper: DatabaseHelper(),
+        imageService: ImageService(),
+        httpsConsumer: HttpsConsumer(),
+      ).fetchTasks();
+      return emit(FetchTasksSuccess(tasks: tasks));
     }
   }
 
@@ -118,7 +87,7 @@ class TasksBloc extends Bloc<TasksEvents, TasksStates> {
     await _upload(UploadOfflineTasks(), emit);
     await _delete(DeleteOfflineTasks(), emit);
     await _paginatedFetch(
-      PaginatedFetchTasks(isPagination: event.isPagination),
+      PaginatedFetchTasks(),
       emit,
     );
   }

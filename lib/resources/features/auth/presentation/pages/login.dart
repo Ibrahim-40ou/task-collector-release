@@ -35,7 +35,7 @@ class LoginPage extends StatelessWidget {
           );
         }
         if (state is SendOTPSuccess) {
-          if(context.router.current.name == 'LoginRoute') {
+          if (context.router.current.name == 'LoginRoute') {
             context.read<TimerCubit>().resetTimer();
             context.router.push(
               OTPRoute(
@@ -44,7 +44,6 @@ class LoginPage extends StatelessWidget {
               ),
             );
           }
-
         }
       },
       builder: (BuildContext context, state) {

@@ -16,9 +16,9 @@ class MapBloc extends Bloc<MapEvents, MapStates> {
   }
 
   void _refresh(
-      Refresh event,
-      Emitter<MapStates> emit,
-      ) {
+    Refresh event,
+    Emitter<MapStates> emit,
+  ) {
     emit(MapReady());
   }
 

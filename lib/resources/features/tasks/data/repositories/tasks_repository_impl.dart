@@ -9,11 +9,6 @@ class TasksRepositoryImpl extends TasksRepository {
   TasksRepositoryImpl({required this.tasksDatasource});
 
   @override
-  Future<Result<void>> fetchTasks() async {
-    return await tasksDatasource.fetchTasks();
-  }
-
-  @override
   Future<Result<void>> addTask(TaskModel task) async {
     return await tasksDatasource.addTask(task);
   }

@@ -34,7 +34,6 @@ class UserInformationBloc
 
   @override
   void onChange(Change<UserInformationState> change) {
-    // TODO: implement onChange
     super.onChange(change);
     if (kDebugMode) {
       print(change);

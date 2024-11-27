@@ -45,6 +45,7 @@ class MapPage extends StatelessWidget {
               }
             },
           );
+
           return WillPopScope(
             onWillPop: () async {
               context.read<MapBloc>().add(DisposeMap());
@@ -56,6 +57,8 @@ class MapPage extends StatelessWidget {
                   children: [
                     state is MapReady || state is MapInitial
                         ? GoogleMap(
+                            myLocationButtonEnabled: isForShow,
+                            myLocationEnabled: true,
                             zoomControlsEnabled: false,
                             initialCameraPosition: CameraPosition(
                               target: currentPosition,
@@ -85,10 +88,15 @@ class MapPage extends StatelessWidget {
                               }
                             },
                             markers: {
-                              Marker(
-                                markerId: const MarkerId('initial_marker'),
-                                position: currentPosition,
-                              ),
+                              isForShow
+                                  ? Marker(
+                                      markerId:
+                                          const MarkerId('initial_marker'),
+                                      position: currentPosition,
+                                    )
+                                  : Marker(
+                                      markerId: const MarkerId('none'),
+                                    ),
                             },
                           )
                         : Center(
@@ -104,11 +112,13 @@ class MapPage extends StatelessWidget {
                                 return Center(
                                   child: AnimatedPadding(
                                     padding: EdgeInsets.only(
-                                        bottom: state ? 7.5.h : 4.5.h),
+                                      bottom: state ? 7.5.h : 4.5.h,
+                                    ),
                                     duration: Duration(milliseconds: 100),
                                     child: SvgPicture.asset(
                                       'assets/images/pin.svg',
-                                      color: Colors.red,
+                                      color:
+                                          Theme.of(context).colorScheme.primary,
                                       height: 5.h,
                                       width: 5.h,
                                     ),

@@ -18,4 +18,3 @@ class PlacesFetched extends MapFStates {
 
   PlacesFetched({required this.placesInformation});
 }
-

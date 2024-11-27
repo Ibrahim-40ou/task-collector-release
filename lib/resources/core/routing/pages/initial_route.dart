@@ -18,7 +18,7 @@ class InitialScreen extends StatelessWidget {
     if (loggedIn) {
       context.read<UserInformationBloc>().add(UserLogoutEvent());
       context.read<TasksBloc>().add(TasksLogout());
-      context.read<TasksBloc>().add(SerializationEvent(isPagination: false));
+      context.read<TasksBloc>().add(SerializationEvent());
       context.read<UserInformationBloc>().add(SerializationUserEvent());
 
       context.router.replaceAll([AppRoute()]);

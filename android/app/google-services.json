@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "386123382707",
+    "project_id": "tasks-collector-66a94",
+    "storage_bucket": "tasks-collector-66a94.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:386123382707:android:f10c1cfed8f7bb7630d5c6",
+        "android_client_info": {
+          "package_name": "com.alwasl.taskscollector"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB23-ReNkylp3JaoWF0e2_sdK5hA9Eylk4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

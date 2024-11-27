@@ -33,7 +33,8 @@ class LocalTasksDatasource {
         governorateId: taskEntity.governorateId,
         date: taskEntity.date,
         media: taskEntity.media,
-        statusId: taskEntity.statusId, uploadStatus: '',
+        statusId: taskEntity.statusId,
+        uploadStatus: '',
       );
       List<String> localImagePaths = [];
       for (String imageUrl in task.media) {

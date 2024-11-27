@@ -60,4 +60,3 @@ class DeletedOfflineTasksFailure extends TasksStates {
 
   DeletedOfflineTasksFailure({required this.failure});
 }
-
