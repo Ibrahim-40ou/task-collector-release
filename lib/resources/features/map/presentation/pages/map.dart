@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:tasks_collector/resources/core/routing/routes.gr.dart';
 import 'package:tasks_collector/resources/core/sizing/size_config.dart';
@@ -12,6 +13,7 @@ import 'package:tasks_collector/resources/core/widgets/loading_indicator.dart';
 import 'package:tasks_collector/resources/core/widgets/text.dart';
 import 'package:tasks_collector/resources/core/widgets/text_form_field.dart';
 
+import '../../../../core/utils/common_functions.dart';
 import '../../../../core/widgets/back_button.dart';
 import '../state/bloc/map/map_bloc.dart';
 
@@ -21,6 +23,7 @@ class MapPage extends StatelessWidget {
   final bool isForShow;
   late LatLng centerPosition;
   final TextEditingController _search = TextEditingController();
+  late LatLng? myPosition;
 
   MapPage({
     super.key,
@@ -30,11 +33,13 @@ class MapPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    _fetchCurrentLocation();
     return MultiBlocProvider(
       providers: [
         BlocProvider<MapBloc>(create: (context) => MapBloc()),
         BlocProvider<PinAnimationCubit>(
-            create: (context) => PinAnimationCubit()),
+          create: (context) => PinAnimationCubit(),
+        ),
       ],
       child: BlocBuilder<MapBloc, MapStates>(
         builder: (BuildContext context, MapStates state) {
@@ -57,7 +62,7 @@ class MapPage extends StatelessWidget {
                   children: [
                     state is MapReady || state is MapInitial
                         ? GoogleMap(
-                            myLocationButtonEnabled: isForShow,
+                            myLocationButtonEnabled: false,
                             myLocationEnabled: true,
                             zoomControlsEnabled: false,
                             initialCameraPosition: CameraPosition(
@@ -109,22 +114,24 @@ class MapPage extends StatelessWidget {
                         : state is MapReady
                             ? BlocBuilder<PinAnimationCubit, bool>(
                                 builder: (context, state) {
-                                return Center(
-                                  child: AnimatedPadding(
-                                    padding: EdgeInsets.only(
-                                      bottom: state ? 7.5.h : 4.5.h,
+                                  return Center(
+                                    child: AnimatedPadding(
+                                      padding: EdgeInsets.only(
+                                        bottom: state ? 7.5.h : 4.5.h,
+                                      ),
+                                      duration: Duration(milliseconds: 100),
+                                      child: SvgPicture.asset(
+                                        'assets/images/pin.svg',
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .primary,
+                                        height: 5.h,
+                                        width: 5.h,
+                                      ),
                                     ),
-                                    duration: Duration(milliseconds: 100),
-                                    child: SvgPicture.asset(
-                                      'assets/images/pin.svg',
-                                      color:
-                                          Theme.of(context).colorScheme.primary,
-                                      height: 5.h,
-                                      width: 5.h,
-                                    ),
-                                  ),
-                                );
-                              })
+                                  );
+                                },
+                              )
                             : Container(),
                     Positioned(
                       top: 2.w,
@@ -135,6 +142,40 @@ class MapPage extends StatelessWidget {
                         function: () {
                           context.read<MapBloc>().add(DisposeMap());
                         },
+                      ),
+                    ),
+                    Positioned(
+                      bottom: 2.w,
+                      left: 2.w,
+                      child: CustomButton(
+                        height: 6.h,
+                        width: 6.h,
+                        function: () {
+                          if (myPosition != null) {
+                            context
+                                .read<MapBloc>()
+                                .mapController
+                                ?.animateCamera(
+                                  CameraUpdate.newLatLng(
+                                    myPosition!,
+                                  ),
+                                );
+                          } else {
+                            CommonFunctions().showDialogue(
+                              context,
+                              'please wait until your current location is fetched',
+                              '',
+                              () {},
+                              () {},
+                            );
+                          }
+                        },
+                        color: Theme.of(context).colorScheme.primary,
+                        child: Icon(
+                          Icons.my_location_outlined,
+                          size: 6.w,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                     isForShow
@@ -151,13 +192,24 @@ class MapPage extends StatelessWidget {
                                     height: 6.h,
                                     width: 6.h,
                                     function: () {
-                                      context
-                                          .read<MapBloc>()
-                                          .mapController
-                                          ?.animateCamera(
-                                            CameraUpdate.newLatLng(
-                                                currentPosition),
-                                          );
+                                      if (myPosition != null) {
+                                        context
+                                            .read<MapBloc>()
+                                            .mapController
+                                            ?.animateCamera(
+                                              CameraUpdate.newLatLng(
+                                                myPosition!,
+                                              ),
+                                            );
+                                      } else {
+                                        CommonFunctions().showDialogue(
+                                          context,
+                                          'please wait until your current location is fetched',
+                                          '',
+                                          () {},
+                                          () {},
+                                        );
+                                      }
                                     },
                                     color:
                                         Theme.of(context).colorScheme.primary,
@@ -236,6 +288,16 @@ class MapPage extends StatelessWidget {
         },
       ),
     );
+  }
+
+  Future<void> _fetchCurrentLocation() async {
+    Position position = await Geolocator.getCurrentPosition(
+      locationSettings: LocationSettings(
+        accuracy: LocationAccuracy.high,
+        distanceFilter: 100,
+      ),
+    );
+    myPosition = LatLng(position.latitude, position.longitude);
   }
 }
 

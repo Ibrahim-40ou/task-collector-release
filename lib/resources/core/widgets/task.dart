@@ -22,7 +22,8 @@ import '../utils/common_functions.dart';
 import 'button.dart';
 import 'loading_indicator.dart';
 
-class CustomTask extends StatelessWidget {
+// import "../theme/youssef Alkobary Is Here... haahahahah";
+class CustomTaskCard extends StatelessWidget {
   final TaskEntity task;
   final bool isDarkMode;
   final int index;
@@ -32,7 +33,7 @@ class CustomTask extends StatelessWidget {
   final counterOpacityCubit = CounterOpacityCubit();
   Timer? timer;
 
-  CustomTask({
+  CustomTaskCard({
     super.key,
     required this.task,
     required this.isDarkMode,
@@ -316,7 +317,7 @@ class CustomTask extends StatelessWidget {
                       ),
                       SizedBox(width: 2.w),
                       ConstrainedBox(
-                        constraints: BoxConstraints(maxWidth: 70.w),
+                        constraints: BoxConstraints(maxWidth: 65.w),
                         child: CustomText(
                           text: task.address,
                           size: 4.5.sp,

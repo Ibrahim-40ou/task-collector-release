@@ -14,9 +14,9 @@ import 'package:tasks_collector/resources/core/routing/routes.gr.dart';
 import 'package:tasks_collector/resources/core/services/internet_services.dart';
 import 'package:tasks_collector/resources/core/sizing/size_config.dart';
 import 'package:tasks_collector/main.dart';
+import 'package:tasks_collector/resources/core/utils/governorates.dart';
 
 import '../../../../core/utils/common_functions.dart';
-import '../../../../core/utils/governorates.dart';
 import '../../../../core/utils/image_selection_state/image_selection_bloc.dart';
 import '../../../../core/widgets/back_button.dart';
 import '../../../../core/widgets/button.dart';
@@ -32,10 +32,9 @@ class AddTaskPage extends StatelessWidget {
   final _key = GlobalKey<FormState>();
 
   final TextEditingController _governorate = TextEditingController();
-
-  // final TextEditingController _address = TextEditingController();
   final TextEditingController _location = TextEditingController();
   final TextEditingController _description = TextEditingController();
+  final Governorates _governorates = Governorates();
   late String governorate;
   late String address;
   late String secondaryAddress;
@@ -241,7 +240,9 @@ class AddTaskPage extends StatelessWidget {
                           ),
                           child: CustomButton(
                             function: () {
-                              _governorate.text = governoratesList[index].tr();
+                              _governorate.text = _governorates
+                                  .governoratesNames[index]
+                                  .toString();
                               context.router.popForced();
                             },
                             height: 6.h,
@@ -252,7 +253,7 @@ class AddTaskPage extends StatelessWidget {
                                     .withOpacity(0.2)
                                 : Theme.of(context).colorScheme.secondary,
                             child: CustomText(
-                              text: governoratesList[index].tr(),
+                              text: _governorates.governoratesNames[index],
                             ),
                           ),
                         );
@@ -566,9 +567,9 @@ class AddTaskPage extends StatelessWidget {
                     id: _generateUniqueId(),
                     description: _description.text.trim(),
                     address: '$governorate, $address, $secondaryAddress',
-                    governorateId: CommonFunctions()
-                            .getGovernorateNumber(_governorate.text, context) ??
-                        '',
+                    governorateId: _governorates
+                        .governoratesMap[_governorate.text]
+                        .toString(),
                     date: DateTime.now().toUtc().toIso8601String(),
                     media: images.map((image) => image!.path).toList(),
                     lat: lat,

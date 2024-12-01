@@ -25,6 +25,7 @@ class ProfileInformationPage extends StatelessWidget {
   final TextEditingController _fullName = TextEditingController();
   final TextEditingController _governorate = TextEditingController();
   final TextEditingController _phoneNumber = TextEditingController();
+  final Governorates _governorates = Governorates();
   final _key = GlobalKey<FormState>();
   String? avatar;
   XFile? selectedImageFile;
@@ -61,10 +62,16 @@ class ProfileInformationPage extends StatelessWidget {
           _initialUserInfo = state.userData;
           _phoneNumber.text = _initialUserInfo.phoneNumber;
           _fullName.text = _initialUserInfo.name ?? '';
-          _governorate.text = CommonFunctions()
-                  .getGovernorateName(_initialUserInfo.governorate)
-                  ?.tr() ??
-              '';
+          _governorate.text = _governorates.governoratesMap.entries
+              .firstWhere(
+                (entry) =>
+                    entry.value ==
+                    int.parse(_initialUserInfo.governorate != null
+                        ? _initialUserInfo.governorate!
+                        : ''),
+                orElse: () => MapEntry('', -1),
+              )
+              .key;
           avatar = _initialUserInfo.avatar ?? '';
         }
         return WillPopScope(
@@ -384,8 +391,9 @@ class ProfileInformationPage extends StatelessWidget {
                                 ),
                                 child: CustomButton(
                                   function: () {
-                                    _governorate.text =
-                                        governoratesList[index].tr();
+                                    _governorate.text = _governorates
+                                        .governoratesNames[index]
+                                        .toString();
                                     context.router.popForced();
                                   },
                                   height: 6.h,
@@ -396,7 +404,8 @@ class ProfileInformationPage extends StatelessWidget {
                                           .withOpacity(0.2)
                                       : Theme.of(context).colorScheme.secondary,
                                   child: CustomText(
-                                    text: governoratesList[index].tr(),
+                                    text:
+                                        _governorates.governoratesNames[index],
                                   ),
                                 ),
                               );
@@ -426,11 +435,9 @@ class ProfileInformationPage extends StatelessWidget {
                       UpdateUserInformation(
                         fullName: _fullName.text,
                         avatar: selectedImageFile?.path ?? avatar ?? '',
-                        governorate: CommonFunctions().getGovernorateNumber(
-                              _governorate.text,
-                              context,
-                            ) ??
-                            '',
+                        governorate: _governorates
+                            .governoratesMap[_governorate.text]
+                            .toString(),
                         phoneNumber: _phoneNumber.text,
                       ),
                     );

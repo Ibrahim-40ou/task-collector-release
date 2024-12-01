@@ -333,8 +333,7 @@ class TaskDetailsPage extends StatelessWidget {
               SizedBox(width: 2.w),
               Expanded(
                 child: CustomText(
-                  text:
-                      '${capitalizeFirstLetter(CommonFunctions().getGovernorateName(task!.governorateId)!)}, ${task!.address}',
+                  text: task!.address,
                 ),
               ),
             ],

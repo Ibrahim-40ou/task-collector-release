@@ -31,4 +31,9 @@ class AuthRepositoryImpl extends AuthRepository {
       filePath: avatar,
     );
   }
+
+  @override
+  Future<Result<void>> fetchGovernorates() async {
+    return await authDatasourece.fetchGovernorates();
+  }
 }

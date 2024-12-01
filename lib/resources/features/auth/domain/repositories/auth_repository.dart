@@ -9,4 +9,7 @@ abstract class AuthRepository {
     String governorate,
     String avatar,
   );
+
+  Future<void> fetchGovernorates();
+
 }

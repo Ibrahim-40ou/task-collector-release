@@ -247,7 +247,7 @@ class StatisticsPage extends StatelessWidget {
             return dateB.compareTo(dateA);
           },
         );
-        return CustomTask(
+        return CustomTaskCard(
           task: tasks[index],
           isDarkMode: isDarkMode,
           index: index,

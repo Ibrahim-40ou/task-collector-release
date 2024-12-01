@@ -3,6 +3,12 @@ part of 'auth_bloc.dart';
 @immutable
 sealed class AuthEvent {}
 
+class FetchGovernorates extends AuthEvent {
+  final bool isLogin;
+
+  FetchGovernorates({required this.isLogin});
+}
+
 class SendOTPRequest extends AuthEvent {
   final String phoneNumber;
 

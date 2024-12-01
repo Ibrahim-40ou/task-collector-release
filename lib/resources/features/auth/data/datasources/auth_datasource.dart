@@ -6,6 +6,7 @@ import '../../../../core/api/endpoints.dart';
 import '../../../../core/api/https_consumer.dart';
 import '../../../../core/utils/result.dart';
 import '../../../../../main.dart';
+import '../models/governorate_model.dart';
 
 class AuthDatasource {
   final HttpsConsumer httpsConsumer;
@@ -86,6 +87,27 @@ class AuthDatasource {
     );
 
     if (result.data != null) {
+      return Result<void>(data: null);
+    } else {
+      return Result<void>(error: result.error);
+    }
+  }
+
+  Future<Result<void>> fetchGovernorates() async {
+    List<GovernorateModel> governorateModels = [];
+    Map<String, int> governorates = {};
+    final result = await httpsConsumer.get(
+      endpoint: EndPoints.governorate,
+    );
+    if (result.isSuccess && result.data != null) {
+      final responseBody = jsonDecode(result.data!.body);
+      for (Map<String, dynamic> governorate in responseBody['data']) {
+        governorateModels.add(GovernorateModel.fromJson(governorate));
+      }
+      for (GovernorateModel governorateModel in governorateModels) {
+        governorates[governorateModel.name] = governorateModel.id;
+      }
+      preferences!.setString('governorates', jsonEncode(governorates));
       return Result<void>(data: null);
     } else {
       return Result<void>(error: result.error);

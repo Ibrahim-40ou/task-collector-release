@@ -91,12 +91,6 @@ class MyApp extends StatelessWidget {
       builder: (context, state) {
         return LayoutBuilder(
           builder: (context, constraints) {
-            final isDarkMode = state is ThemeChanged
-                ? state.isDarkMode
-                : preferences?.getString('theme') == 'dark'
-                    ? true
-                    : false;
-            CommonFunctions().initiateSystemThemes(isDarkMode);
             SizeConfig().init(constraints);
             return MaterialApp.router(
               title: 'Tasks Collector',
@@ -113,7 +107,6 @@ class MyApp extends StatelessWidget {
                           .setString('deepLink', deepLink.path.split('/').last);
                       return DeepLink.defaultPath;
                     } else {
-                      // DeepLink([AppRoute()]);
                       return deepLink;
                     }
                   } else {
@@ -123,14 +116,9 @@ class MyApp extends StatelessWidget {
               ),
               theme: light,
               darkTheme: dark,
-              themeMode: isDarkMode ? ThemeMode.dark : ThemeMode.light,
+              themeMode: context.read<ThemeBloc>().mode,
               builder: (context, child) {
-                return MediaQuery(
-                  data: MediaQuery.of(context).copyWith(
-                    textScaler: const TextScaler.linear(1.0),
-                  ),
-                  child: child!,
-                );
+                return child!;
               },
             );
           },

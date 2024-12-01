@@ -7,6 +7,7 @@ import '../../../../../core/utils/result.dart';
 import '../../../../../../main.dart';
 import '../../../data/datasources/auth_datasource.dart';
 import '../../../data/repositories/auth_repository_impl.dart';
+import '../../../domain/use_cases/governorates_use_case.dart';
 import '../../../domain/use_cases/login_usecase.dart';
 import '../../../domain/use_cases/register_usecase.dart';
 import '../../../domain/use_cases/send_otp_usecase.dart';
@@ -21,6 +22,26 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<LoginRequest>(_login);
     on<LogoutRequest>(_logout);
     on<RegisterRequest>(_register);
+    on<FetchGovernorates>(_fetchGovernorates);
+  }
+
+  Future<void> _fetchGovernorates(
+    FetchGovernorates event,
+    Emitter<AuthState> emit,
+  ) async {
+    emit(FetchGovernoratesLoading(isLogin: event.isLogin));
+    final Result result = await FetchGovernoratesUseCase(
+      authRepositoryImpl: AuthRepositoryImpl(
+        authDatasourece: AuthDatasource(
+          httpsConsumer: HttpsConsumer(),
+        ),
+      ),
+    ).call();
+    if (result.isSuccess) {
+      return emit(FetchGovernoratesSuccess(isLogin: event.isLogin));
+    } else {
+      return emit(FetchGovernoratesFailure(failure: result.error));
+    }
   }
 
   Future<void> _sendOTP(SendOTPRequest event, Emitter<AuthState> emit) async {

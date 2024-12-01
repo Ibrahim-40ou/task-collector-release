@@ -5,6 +5,7 @@ class EndPoints {
   static const String register = "auth/register";
   static const String me = "auth/me";
   static const String profile = "auth/profile";
+  static const String governorate = "governorate?per_page=18";
   static const String complaint = "complaint";
   static const String deleteComplaint = "complaint/";
   static const String perPage = "complaint?per_page=";

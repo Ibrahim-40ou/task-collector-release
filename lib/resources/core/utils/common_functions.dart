@@ -14,7 +14,6 @@ import '../theme/colors.dart';
 import '../theme/theme_state/theme_bloc.dart';
 import '../widgets/button.dart';
 import '../widgets/text.dart';
-import 'governorates.dart';
 
 class CommonFunctions {
   String formatDate(String isoDateString) {
@@ -42,6 +41,7 @@ class CommonFunctions {
       return 'Invalid date';
     }
   }
+
   Widget getUploadStatusIcon(String status, BuildContext context) {
     switch (status) {
       case 'uploaded':
@@ -65,6 +65,7 @@ class CommonFunctions {
         );
     }
   }
+
   Future<String> handleLocationServices() async {
     if (await InternetServices().isInternetAvailable()) {
       if (await Geolocator.isLocationServiceEnabled()) {
@@ -204,21 +205,22 @@ class CommonFunctions {
     );
   }
 
-  String? getGovernorateNumber(String governorateName, BuildContext context) {
-    if (Localizations.localeOf(context).toString() == 'en_US') {
-      return governoratesNamesMapEnglish[governorateName.toLowerCase()];
-    } else {
-      return governoratesNamesMapArabic[governorateName];
-    }
-  }
-
-  String? getGovernorateName(String? governorateNumber) {
-    if (governorateNumber != null) {
-      return governoratesNumbersMap[governorateNumber];
-    } else {
-      return null;
-    }
-  }
+  //
+  // String? getGovernorateNumber(String governorateName, BuildContext context) {
+  //   if (Localizations.localeOf(context).toString() == 'en_US') {
+  //     return governoratesNamesMapEnglish[governorateName.toLowerCase()];
+  //   } else {
+  //     return governoratesNamesMapArabic[governorateName];
+  //   }
+  // }
+  //
+  // String? getGovernorateName(String? governorateNumber) {
+  //   if (governorateNumber != null) {
+  //     return governoratesNumbersMap[governorateNumber];
+  //   } else {
+  //     return null;
+  //   }
+  // }
 
   void changeStatusBarColor(
     bool isPrimary,

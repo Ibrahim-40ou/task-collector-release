@@ -9,9 +9,9 @@ import 'package:iconsax/iconsax.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tasks_collector/resources/core/routing/routes.gr.dart';
 import 'package:tasks_collector/resources/core/sizing/size_config.dart';
+import 'package:tasks_collector/resources/core/utils/governorates.dart';
 
 import '../../../../core/utils/common_functions.dart';
-import '../../../../core/utils/governorates.dart';
 import '../../../../core/utils/image_selection_state/image_selection_bloc.dart';
 import '../../../../core/widgets/back_button.dart';
 import '../../../../core/widgets/button.dart';
@@ -26,6 +26,7 @@ class RegisterPage extends StatelessWidget {
   final TextEditingController _fullName = TextEditingController();
   final TextEditingController _phoneNumber = TextEditingController();
   final TextEditingController _governorate = TextEditingController();
+  final Governorates _governorates = Governorates();
   final _key = GlobalKey<FormState>();
   XFile? _selectedImage;
   XFile? _reserveImage;
@@ -326,8 +327,9 @@ class RegisterPage extends StatelessWidget {
                               ),
                               child: CustomButton(
                                 function: () {
-                                  _governorate.text =
-                                      governoratesList[index].tr();
+                                  _governorate.text = _governorates
+                                      .governoratesNames[index]
+                                      .toString();
                                   context.router.popForced();
                                 },
                                 height: 6.h,
@@ -338,7 +340,7 @@ class RegisterPage extends StatelessWidget {
                                         .withOpacity(0.2)
                                     : Theme.of(context).colorScheme.secondary,
                                 child: CustomText(
-                                  text: governoratesList[index].tr(),
+                                  text: _governorates.governoratesNames[index],
                                 ),
                               ),
                             );
@@ -364,9 +366,8 @@ class RegisterPage extends StatelessWidget {
                 RegisterRequest(
                   fullName: _fullName.text.trim(),
                   phoneNumber: _phoneNumber.text.trim(),
-                  governorate: CommonFunctions()
-                          .getGovernorateNumber(_governorate.text, context) ??
-                      '',
+                  governorate: _governorates.governoratesMap[_governorate.text]
+                      .toString(),
                   avatar: _selectedImage?.path ?? '',
                 ),
               );

@@ -61,7 +61,7 @@ class CustomStatistic extends StatelessWidget {
                 SizedBox(width: 2.w),
                 CustomText(
                   text: title == null ? '' : title!.tr(),
-                  size: 7.sp,
+                  size: MediaQuery.of(context).textScaleFactor > 1.2 ?  6.sp : 7.sp,
                   weight: FontWeight.w500,
                   color: selected ? Colors.white : null,
                 ),

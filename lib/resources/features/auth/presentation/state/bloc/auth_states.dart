@@ -5,6 +5,24 @@ sealed class AuthState {}
 
 class AuthInitial extends AuthState {}
 
+class FetchGovernoratesLoading extends AuthState {
+  final bool isLogin;
+
+  FetchGovernoratesLoading({required this.isLogin});
+}
+
+class FetchGovernoratesFailure extends AuthState {
+  final String? failure;
+
+  FetchGovernoratesFailure({required this.failure});
+}
+
+class FetchGovernoratesSuccess extends AuthState {
+  final bool isLogin;
+
+  FetchGovernoratesSuccess({required this.isLogin});
+}
+
 class SendOTPLoading extends AuthState {}
 
 class SendOTPFailure extends AuthState {

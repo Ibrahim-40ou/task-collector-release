@@ -44,7 +44,12 @@ class OTPPage extends StatelessWidget {
         return SafeArea(
           child: Scaffold(
             body: Padding(
-              padding: EdgeInsets.all(5.w),
+              padding: EdgeInsets.only(
+                top: 5.w,
+                left: 5.w,
+                right: 5.w,
+                bottom: 3.w,
+              ),
               child: Form(
                 key: _key,
                 child: Column(
@@ -52,9 +57,9 @@ class OTPPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CustomBackButton(),
-                    SizedBox(height: 2.h),
+                    SizedBox(height: 1.h),
                     _buildInformationalTexts(context),
-                    SizedBox(height: 2.h),
+                    SizedBox(height: 1.h),
                     _buildPinField(context),
                     Spacer(),
                     _buildResendCodeButton(context),
@@ -82,7 +87,7 @@ class OTPPage extends StatelessWidget {
                 color: Theme.of(context).colorScheme.primary,
                 weight: FontWeight.w500,
               ),
-        SizedBox(height: 2.h),
+        SizedBox(height: 1.h),
         CustomText(
           text: 'enter 6-digit verification code'.tr(),
           size: CommonFunctions().englishCheck(context) ? 12.sp : 9.sp,
@@ -95,6 +100,7 @@ class OTPPage extends StatelessWidget {
           children: [
             CustomText(
               text: "enter the code sent to".tr(),
+              size: 5.4.sp,
             ),
             CustomText(
               text: ' $phoneNumber',

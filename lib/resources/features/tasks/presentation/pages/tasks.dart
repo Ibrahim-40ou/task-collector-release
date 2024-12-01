@@ -234,7 +234,7 @@ class TasksPage extends StatelessWidget {
 
           return Padding(
             padding: EdgeInsets.symmetric(vertical: 0.5.h, horizontal: 2.w),
-            child: CustomTask(
+            child: CustomTaskCard(
               task: tasks[index],
               isDarkMode: isDarkMode,
               index: index,
