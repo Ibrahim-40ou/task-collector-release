@@ -35,7 +35,6 @@ class TasksPage extends StatelessWidget {
         }
       },
     );
-
     bool isDarkMode = CommonFunctions().darkModeCheck(context);
     CommonFunctions().changeStatusBarColor(false, isDarkMode, context, null);
     return SafeArea(
