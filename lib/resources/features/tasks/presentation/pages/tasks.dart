@@ -23,6 +23,7 @@ class TasksPage extends StatelessWidget {
   late List<TaskEntity> tasks = [];
 
   TasksPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback(
