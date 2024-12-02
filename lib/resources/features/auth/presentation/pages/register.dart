@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tasks_collector/resources/core/routing/routes.gr.dart';
 import 'package:tasks_collector/resources/core/sizing/size_config.dart';
@@ -145,6 +146,31 @@ class RegisterPage extends StatelessWidget {
                           onGranted: () async {
                             _selectedImage = await ImagePicker()
                                 .pickImage(source: ImageSource.camera);
+                            if (_selectedImage != null) {
+                              CroppedFile? croppedImage =
+                                  await ImageCropper().cropImage(
+                                sourcePath: _selectedImage!.path,
+                                uiSettings: [
+                                  AndroidUiSettings(
+                                    initAspectRatio:
+                                        CropAspectRatioPreset.original,
+                                    lockAspectRatio: true,
+                                    cropStyle: CropStyle.circle,
+                                    activeControlsWidgetColor:
+                                        Theme.of(context).colorScheme.primary,
+                                    showCropGrid: false,
+                                  ),
+                                  IOSUiSettings(
+                                    cropStyle: CropStyle.circle,
+                                  )
+                                ],
+                              );
+                              if (croppedImage != null) {
+                                _selectedImage = XFile(croppedImage.path);
+                              } else {
+                                _selectedImage = null;
+                              }
+                            }
                             context.read<ImageSelectionBloc>().add(
                                   SelectImageRequest(
                                     selectedImages: [_selectedImage],
@@ -191,6 +217,31 @@ class RegisterPage extends StatelessWidget {
                           onGranted: () async {
                             _selectedImage = await ImagePicker()
                                 .pickImage(source: ImageSource.gallery);
+                            if (_selectedImage != null) {
+                              CroppedFile? croppedImage =
+                                  await ImageCropper().cropImage(
+                                sourcePath: _selectedImage!.path,
+                                uiSettings: [
+                                  AndroidUiSettings(
+                                    initAspectRatio:
+                                        CropAspectRatioPreset.original,
+                                    lockAspectRatio: true,
+                                    cropStyle: CropStyle.circle,
+                                    activeControlsWidgetColor:
+                                        Theme.of(context).colorScheme.primary,
+                                    showCropGrid: false,
+                                  ),
+                                  IOSUiSettings(
+                                    cropStyle: CropStyle.circle,
+                                  )
+                                ],
+                              );
+                              if (croppedImage != null) {
+                                _selectedImage = XFile(croppedImage.path);
+                              } else {
+                                _selectedImage = null;
+                              }
+                            }
                             context.read<ImageSelectionBloc>().add(
                                   SelectImageRequest(
                                     selectedImages: [_selectedImage],

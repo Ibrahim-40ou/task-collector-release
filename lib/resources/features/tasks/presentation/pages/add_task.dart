@@ -9,6 +9,7 @@ import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tasks_collector/resources/core/routing/routes.gr.dart';
 import 'package:tasks_collector/resources/core/services/internet_services.dart';
@@ -346,7 +347,25 @@ class AddTaskPage extends StatelessWidget {
                                         source: ImageSource.camera,
                                       );
                                       if (image != null) {
-                                        images.add(image);
+                                        CroppedFile? croppedImage =
+                                            await ImageCropper().cropImage(
+                                          sourcePath: image!.path,
+                                          uiSettings: [
+                                            AndroidUiSettings(
+                                              initAspectRatio:
+                                                  CropAspectRatioPreset
+                                                      .original,
+                                              lockAspectRatio: false,
+                                              activeControlsWidgetColor:
+                                                  Theme.of(context)
+                                                      .colorScheme
+                                                      .primary,
+                                            ),
+                                          ],
+                                        );
+                                        if (croppedImage != null) {
+                                          images.add(XFile(croppedImage.path));
+                                        }
                                       }
                                       context.read<ImageSelectionBloc>().add(
                                             SelectImageRequest(
@@ -400,7 +419,32 @@ class AddTaskPage extends StatelessWidget {
                                     onGranted: () async {
                                       List<XFile?> selectedImages =
                                           await ImagePicker().pickMultiImage();
-                                      images.addAll(selectedImages);
+                                      List<CroppedFile?> croppedImages = [];
+                                      for (var image in selectedImages) {
+                                        CroppedFile? croppedImage =
+                                            await ImageCropper().cropImage(
+                                          sourcePath: image!.path,
+                                          uiSettings: [
+                                            AndroidUiSettings(
+                                              initAspectRatio:
+                                                  CropAspectRatioPreset
+                                                      .original,
+                                              lockAspectRatio: false,
+                                              activeControlsWidgetColor:
+                                                  Theme.of(context)
+                                                      .colorScheme
+                                                      .primary,
+                                            ),
+                                          ],
+                                        );
+                                        if (croppedImage != null) {
+                                          croppedImages.add(croppedImage);
+                                        }
+                                      }
+                                      for (var image in croppedImages) {
+                                        images.add(XFile(image!.path));
+                                      }
+                                      // images.addAll(selectedImages);
                                       context.read<ImageSelectionBloc>().add(
                                             SelectImageRequest(
                                               selectedImages: images,

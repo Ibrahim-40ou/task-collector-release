@@ -41,6 +41,7 @@ class TasksPage extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         body: RefreshIndicator(
+          color: Theme.of(context).colorScheme.primary,
           onRefresh: () async {
             context.read<TasksBloc>().add(SerializationEvent());
           },
