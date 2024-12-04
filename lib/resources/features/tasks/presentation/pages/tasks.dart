@@ -28,11 +28,11 @@ class TasksPage extends StatelessWidget {
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback(
       (_) {
-        if (preferences!.getString('deepLink') != null) {
-          AutoRouter.of(context)
-              .push(TaskDetailsRoute(id: preferences!.getString('deepLink')));
-          preferences!.remove('deepLink');
-        }
+        // if (preferences!.getString('deepLink') != null) {
+        //   AutoRouter.of(context)
+        //       .push(TaskDetailsRoute(id: preferences!.getString('deepLink')));
+        //   // preferences!.remove('deepLink');
+        // }
       },
     );
     bool isDarkMode = CommonFunctions().darkModeCheck(context);

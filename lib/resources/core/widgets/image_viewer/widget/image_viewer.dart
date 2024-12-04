@@ -124,6 +124,7 @@ class ImageViewerPage extends StatelessWidget {
                 null,
               );
               context.read<ImageViewerCubit>().reset();
+              context.router.maybePop();
             },
             backgroundColor: Colors.black.withOpacity(0.5),
             iconColor: Colors.white,

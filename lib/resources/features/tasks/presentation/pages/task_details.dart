@@ -17,6 +17,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
 
+import '../../../../../main.dart';
 import '../../../../core/services/internet_services.dart';
 import '../../../../core/widgets/loading_indicator.dart';
 import '../../domain/entities/task_entity.dart';
@@ -37,7 +38,6 @@ class TaskDetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     bool isDarkMode = CommonFunctions().darkModeCheck(context);
-
     return BlocProvider<TaskDetailsBloc>(
       create: (_) {
         final bloc = TaskDetailsBloc();
@@ -46,26 +46,35 @@ class TaskDetailsPage extends StatelessWidget {
         }
         return bloc;
       },
-      child: BlocBuilder<TaskDetailsBloc, TaskDetailsStates>(
-        builder: (context, state) {
-          if (state is FetchTaskByIDLoading) {
-            return _buildLoadingWidget();
-          } else if (state is FetchTaskByIDFailure) {
-            return _buildFailureMessage(context, state.failure!);
-          } else if (state is FetchTaskByIDSuccess) {
-            task = state.task;
-            return _buildTaskDetailsView(context, isDarkMode);
+      child: WillPopScope(
+        onWillPop: () async {
+          if (preferences!.getString('deepLink') != null) {
+            preferences!.remove('deepLink');
+            context.router.replaceAll([InitialRoute()]);
           }
-          return _buildTaskDetailsView(
-            context,
-            isDarkMode,
-          );
+          return Future.value(true);
         },
+        child: BlocBuilder<TaskDetailsBloc, TaskDetailsStates>(
+          builder: (context, state) {
+            if (state is FetchTaskByIDLoading) {
+              return _buildLoadingWidget(context);
+            } else if (state is FetchTaskByIDFailure) {
+              return _buildFailureMessage(context, state.failure!);
+            } else if (state is FetchTaskByIDSuccess) {
+              task = state.task;
+              return _buildTaskDetailsView(context, isDarkMode);
+            }
+            return _buildTaskDetailsView(
+              context,
+              isDarkMode,
+            );
+          },
+        ),
       ),
     );
   }
 
-  Widget _buildLoadingWidget() {
+  Widget _buildLoadingWidget(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         body: Padding(
@@ -74,7 +83,17 @@ class TaskDetailsPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CustomBackButton(),
+              CustomBackButton(
+                function: () {
+                  if (preferences!.getString('deepLink') != null) {
+                    preferences!.remove('deepLink');
+
+                    context.router.replaceAll([InitialRoute()]);
+                    return;
+                  }
+                  context.router.maybePop();
+                },
+              ),
               SizedBox(height: 2.h),
               CustomText(
                 text: 'task details'.tr(),
@@ -99,7 +118,17 @@ class TaskDetailsPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CustomBackButton(),
+              CustomBackButton(
+                function: () {
+                  if (preferences!.getString('deepLink') != null) {
+                    preferences!.remove('deepLink');
+
+                    context.router.replaceAll([InitialRoute()]);
+                    return;
+                  }
+                  context.router.maybePop();
+                },
+              ),
               SizedBox(height: 2.h),
               CustomText(
                 text: 'task details'.tr(),
@@ -134,7 +163,17 @@ class TaskDetailsPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CustomBackButton(),
+                CustomBackButton(
+                  function: () {
+                    if (preferences!.getString('deepLink') != null) {
+                      preferences!.remove('deepLink');
+
+                      context.router.replaceAll([InitialRoute()]);
+                      return;
+                    }
+                    context.router.maybePop();
+                  },
+                ),
                 SizedBox(height: 2.h),
                 CustomText(
                   text: 'task details'.tr(),

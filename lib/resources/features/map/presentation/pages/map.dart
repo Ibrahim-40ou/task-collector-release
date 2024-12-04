@@ -141,6 +141,7 @@ class MapPage extends StatelessWidget {
                         iconColor: Colors.white,
                         function: () {
                           context.read<MapBloc>().add(DisposeMap());
+                          context.router.maybePop();
                         },
                       ),
                     ),

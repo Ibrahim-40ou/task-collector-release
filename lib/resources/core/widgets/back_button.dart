@@ -9,28 +9,23 @@ class CustomBackButton extends StatelessWidget {
   final Color? backgroundColor;
   final Color? iconColor;
   final Function? function;
-  final bool isMap;
 
   const CustomBackButton({
     super.key,
     this.backgroundColor,
     this.iconColor,
     this.function,
-    this.isMap = false,
   });
 
   @override
   Widget build(BuildContext context) {
     return CustomButton(
       function: () {
-        if(isMap) {
+        if (function != null) {
           function!();
           return;
         }
-        context.router.popForced(true);
-        if (function != null) {
-          function!();
-        }
+        context.router.maybePop();
       },
       color: backgroundColor != null
           ? backgroundColor!

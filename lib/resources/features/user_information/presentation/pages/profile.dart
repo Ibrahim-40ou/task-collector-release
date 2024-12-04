@@ -91,6 +91,7 @@ class ProfileInformationPage extends StatelessWidget {
                     context
                         .read<ImageSelectionBloc>()
                         .add(StopImageSelection());
+                    context.router.maybePop();
                   },
                 ),
               ),

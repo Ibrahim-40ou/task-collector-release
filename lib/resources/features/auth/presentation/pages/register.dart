@@ -79,6 +79,7 @@ class RegisterPage extends StatelessWidget {
                             context
                                 .read<ImageSelectionBloc>()
                                 .add(StopImageSelection());
+                            context.router.maybePop();
                           },
                         ),
                         SizedBox(height: 2.h),

@@ -8,56 +8,58 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:auto_route/auto_route.dart' as _i20;
-import 'package:flutter/cupertino.dart' as _i23;
-import 'package:flutter/material.dart' as _i21;
-import 'package:google_maps_flutter/google_maps_flutter.dart' as _i22;
+import 'package:auto_route/auto_route.dart' as _i21;
+import 'package:flutter/cupertino.dart' as _i24;
+import 'package:flutter/material.dart' as _i22;
+import 'package:google_maps_flutter/google_maps_flutter.dart' as _i23;
 import 'package:tasks_collector/resources/core/routing/pages/app.dart' as _i2;
 import 'package:tasks_collector/resources/core/routing/pages/initial_route.dart'
-    as _i4;
-import 'package:tasks_collector/resources/core/routing/pages/wrappers/landing_wrapper.dart'
     as _i5;
-import 'package:tasks_collector/resources/core/routing/pages/wrappers/settings_wrapper.dart'
-    as _i13;
-import 'package:tasks_collector/resources/core/routing/pages/wrappers/statistics_wrapper.dart'
-    as _i15;
-import 'package:tasks_collector/resources/core/routing/pages/wrappers/tasks_wrapper.dart'
-    as _i18;
-import 'package:tasks_collector/resources/core/widgets/image_viewer/widget/image_viewer.dart'
+import 'package:tasks_collector/resources/core/routing/pages/wrappers/details_wrapper.dart'
     as _i3;
-import 'package:tasks_collector/resources/features/auth/presentation/pages/landing.dart'
+import 'package:tasks_collector/resources/core/routing/pages/wrappers/landing_wrapper.dart'
     as _i6;
-import 'package:tasks_collector/resources/features/auth/presentation/pages/login.dart'
-    as _i7;
-import 'package:tasks_collector/resources/features/auth/presentation/pages/otp.dart'
-    as _i9;
-import 'package:tasks_collector/resources/features/auth/presentation/pages/register.dart'
-    as _i11;
-import 'package:tasks_collector/resources/features/map/presentation/pages/map.dart'
-    as _i8;
-import 'package:tasks_collector/resources/features/map/presentation/pages/search.dart'
-    as _i12;
-import 'package:tasks_collector/resources/features/statistics/presentation/pages/statistics.dart'
+import 'package:tasks_collector/resources/core/routing/pages/wrappers/settings_wrapper.dart'
+    as _i14;
+import 'package:tasks_collector/resources/core/routing/pages/wrappers/statistics_wrapper.dart'
     as _i16;
+import 'package:tasks_collector/resources/core/routing/pages/wrappers/tasks_wrapper.dart'
+    as _i19;
+import 'package:tasks_collector/resources/core/widgets/image_viewer/widget/image_viewer.dart'
+    as _i4;
+import 'package:tasks_collector/resources/features/auth/presentation/pages/landing.dart'
+    as _i7;
+import 'package:tasks_collector/resources/features/auth/presentation/pages/login.dart'
+    as _i8;
+import 'package:tasks_collector/resources/features/auth/presentation/pages/otp.dart'
+    as _i10;
+import 'package:tasks_collector/resources/features/auth/presentation/pages/register.dart'
+    as _i12;
+import 'package:tasks_collector/resources/features/map/presentation/pages/map.dart'
+    as _i9;
+import 'package:tasks_collector/resources/features/map/presentation/pages/search.dart'
+    as _i13;
+import 'package:tasks_collector/resources/features/statistics/presentation/pages/statistics.dart'
+    as _i17;
 import 'package:tasks_collector/resources/features/tasks/domain/entities/task_entity.dart'
-    as _i24;
+    as _i25;
 import 'package:tasks_collector/resources/features/tasks/presentation/pages/add_task.dart'
     as _i1;
 import 'package:tasks_collector/resources/features/tasks/presentation/pages/task_details.dart'
-    as _i17;
+    as _i18;
 import 'package:tasks_collector/resources/features/tasks/presentation/pages/tasks.dart'
-    as _i19;
+    as _i20;
 import 'package:tasks_collector/resources/features/user_information/presentation/pages/profile.dart'
-    as _i10;
+    as _i11;
 import 'package:tasks_collector/resources/features/user_information/presentation/pages/settings.dart'
-    as _i14;
+    as _i15;
 
 /// generated route for
 /// [_i1.AddTaskPage]
-class AddTaskRoute extends _i20.PageRouteInfo<AddTaskRouteArgs> {
+class AddTaskRoute extends _i21.PageRouteInfo<AddTaskRouteArgs> {
   AddTaskRoute({
-    _i21.Key? key,
-    List<_i20.PageRouteInfo>? children,
+    _i22.Key? key,
+    List<_i21.PageRouteInfo>? children,
   }) : super(
           AddTaskRoute.name,
           args: AddTaskRouteArgs(key: key),
@@ -66,7 +68,7 @@ class AddTaskRoute extends _i20.PageRouteInfo<AddTaskRouteArgs> {
 
   static const String name = 'AddTaskRoute';
 
-  static _i20.PageInfo page = _i20.PageInfo(
+  static _i21.PageInfo page = _i21.PageInfo(
     name,
     builder: (data) {
       final args =
@@ -79,7 +81,7 @@ class AddTaskRoute extends _i20.PageRouteInfo<AddTaskRouteArgs> {
 class AddTaskRouteArgs {
   const AddTaskRouteArgs({this.key});
 
-  final _i21.Key? key;
+  final _i22.Key? key;
 
   @override
   String toString() {
@@ -89,10 +91,10 @@ class AddTaskRouteArgs {
 
 /// generated route for
 /// [_i2.AppPage]
-class AppRoute extends _i20.PageRouteInfo<AppRouteArgs> {
+class AppRoute extends _i21.PageRouteInfo<AppRouteArgs> {
   AppRoute({
-    _i21.Key? key,
-    List<_i20.PageRouteInfo>? children,
+    _i22.Key? key,
+    List<_i21.PageRouteInfo>? children,
   }) : super(
           AppRoute.name,
           args: AppRouteArgs(key: key),
@@ -101,7 +103,7 @@ class AppRoute extends _i20.PageRouteInfo<AppRouteArgs> {
 
   static const String name = 'AppRoute';
 
-  static _i20.PageInfo page = _i20.PageInfo(
+  static _i21.PageInfo page = _i21.PageInfo(
     name,
     builder: (data) {
       final args =
@@ -114,7 +116,7 @@ class AppRoute extends _i20.PageRouteInfo<AppRouteArgs> {
 class AppRouteArgs {
   const AppRouteArgs({this.key});
 
-  final _i21.Key? key;
+  final _i22.Key? key;
 
   @override
   String toString() {
@@ -123,13 +125,32 @@ class AppRouteArgs {
 }
 
 /// generated route for
-/// [_i3.ImageViewerPage]
-class ImageViewerRoute extends _i20.PageRouteInfo<ImageViewerRouteArgs> {
+/// [_i3.DetailsNavigatorPage]
+class DetailsNavigatorRoute extends _i21.PageRouteInfo<void> {
+  const DetailsNavigatorRoute({List<_i21.PageRouteInfo>? children})
+      : super(
+          DetailsNavigatorRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'DetailsNavigatorRoute';
+
+  static _i21.PageInfo page = _i21.PageInfo(
+    name,
+    builder: (data) {
+      return const _i3.DetailsNavigatorPage();
+    },
+  );
+}
+
+/// generated route for
+/// [_i4.ImageViewerPage]
+class ImageViewerRoute extends _i21.PageRouteInfo<ImageViewerRouteArgs> {
   ImageViewerRoute({
-    _i21.Key? key,
+    _i22.Key? key,
     required List<String> imageUrls,
     int initialIndex = 0,
-    List<_i20.PageRouteInfo>? children,
+    List<_i21.PageRouteInfo>? children,
   }) : super(
           ImageViewerRoute.name,
           args: ImageViewerRouteArgs(
@@ -142,11 +163,11 @@ class ImageViewerRoute extends _i20.PageRouteInfo<ImageViewerRouteArgs> {
 
   static const String name = 'ImageViewerRoute';
 
-  static _i20.PageInfo page = _i20.PageInfo(
+  static _i21.PageInfo page = _i21.PageInfo(
     name,
     builder: (data) {
       final args = data.argsAs<ImageViewerRouteArgs>();
-      return _i3.ImageViewerPage(
+      return _i4.ImageViewerPage(
         key: args.key,
         imageUrls: args.imageUrls,
         initialIndex: args.initialIndex,
@@ -162,7 +183,7 @@ class ImageViewerRouteArgs {
     this.initialIndex = 0,
   });
 
-  final _i21.Key? key;
+  final _i22.Key? key;
 
   final List<String> imageUrls;
 
@@ -175,9 +196,9 @@ class ImageViewerRouteArgs {
 }
 
 /// generated route for
-/// [_i4.InitialScreen]
-class InitialRoute extends _i20.PageRouteInfo<void> {
-  const InitialRoute({List<_i20.PageRouteInfo>? children})
+/// [_i5.InitialScreen]
+class InitialRoute extends _i21.PageRouteInfo<void> {
+  const InitialRoute({List<_i21.PageRouteInfo>? children})
       : super(
           InitialRoute.name,
           initialChildren: children,
@@ -185,18 +206,18 @@ class InitialRoute extends _i20.PageRouteInfo<void> {
 
   static const String name = 'InitialRoute';
 
-  static _i20.PageInfo page = _i20.PageInfo(
+  static _i21.PageInfo page = _i21.PageInfo(
     name,
     builder: (data) {
-      return const _i4.InitialScreen();
+      return const _i5.InitialScreen();
     },
   );
 }
 
 /// generated route for
-/// [_i5.LandingNavigatorPage]
-class LandingNavigatorRoute extends _i20.PageRouteInfo<void> {
-  const LandingNavigatorRoute({List<_i20.PageRouteInfo>? children})
+/// [_i6.LandingNavigatorPage]
+class LandingNavigatorRoute extends _i21.PageRouteInfo<void> {
+  const LandingNavigatorRoute({List<_i21.PageRouteInfo>? children})
       : super(
           LandingNavigatorRoute.name,
           initialChildren: children,
@@ -204,18 +225,18 @@ class LandingNavigatorRoute extends _i20.PageRouteInfo<void> {
 
   static const String name = 'LandingNavigatorRoute';
 
-  static _i20.PageInfo page = _i20.PageInfo(
+  static _i21.PageInfo page = _i21.PageInfo(
     name,
     builder: (data) {
-      return const _i5.LandingNavigatorPage();
+      return const _i6.LandingNavigatorPage();
     },
   );
 }
 
 /// generated route for
-/// [_i6.LandingPage]
-class LandingRoute extends _i20.PageRouteInfo<void> {
-  const LandingRoute({List<_i20.PageRouteInfo>? children})
+/// [_i7.LandingPage]
+class LandingRoute extends _i21.PageRouteInfo<void> {
+  const LandingRoute({List<_i21.PageRouteInfo>? children})
       : super(
           LandingRoute.name,
           initialChildren: children,
@@ -223,20 +244,20 @@ class LandingRoute extends _i20.PageRouteInfo<void> {
 
   static const String name = 'LandingRoute';
 
-  static _i20.PageInfo page = _i20.PageInfo(
+  static _i21.PageInfo page = _i21.PageInfo(
     name,
     builder: (data) {
-      return const _i6.LandingPage();
+      return const _i7.LandingPage();
     },
   );
 }
 
 /// generated route for
-/// [_i7.LoginPage]
-class LoginRoute extends _i20.PageRouteInfo<LoginRouteArgs> {
+/// [_i8.LoginPage]
+class LoginRoute extends _i21.PageRouteInfo<LoginRouteArgs> {
   LoginRoute({
-    _i21.Key? key,
-    List<_i20.PageRouteInfo>? children,
+    _i22.Key? key,
+    List<_i21.PageRouteInfo>? children,
   }) : super(
           LoginRoute.name,
           args: LoginRouteArgs(key: key),
@@ -245,12 +266,12 @@ class LoginRoute extends _i20.PageRouteInfo<LoginRouteArgs> {
 
   static const String name = 'LoginRoute';
 
-  static _i20.PageInfo page = _i20.PageInfo(
+  static _i21.PageInfo page = _i21.PageInfo(
     name,
     builder: (data) {
       final args =
           data.argsAs<LoginRouteArgs>(orElse: () => const LoginRouteArgs());
-      return _i7.LoginPage(key: args.key);
+      return _i8.LoginPage(key: args.key);
     },
   );
 }
@@ -258,7 +279,7 @@ class LoginRoute extends _i20.PageRouteInfo<LoginRouteArgs> {
 class LoginRouteArgs {
   const LoginRouteArgs({this.key});
 
-  final _i21.Key? key;
+  final _i22.Key? key;
 
   @override
   String toString() {
@@ -267,13 +288,13 @@ class LoginRouteArgs {
 }
 
 /// generated route for
-/// [_i8.MapPage]
-class MapRoute extends _i20.PageRouteInfo<MapRouteArgs> {
+/// [_i9.MapPage]
+class MapRoute extends _i21.PageRouteInfo<MapRouteArgs> {
   MapRoute({
-    _i21.Key? key,
-    required _i22.LatLng currentPosition,
+    _i22.Key? key,
+    required _i23.LatLng currentPosition,
     required bool isForShow,
-    List<_i20.PageRouteInfo>? children,
+    List<_i21.PageRouteInfo>? children,
   }) : super(
           MapRoute.name,
           args: MapRouteArgs(
@@ -286,11 +307,11 @@ class MapRoute extends _i20.PageRouteInfo<MapRouteArgs> {
 
   static const String name = 'MapRoute';
 
-  static _i20.PageInfo page = _i20.PageInfo(
+  static _i21.PageInfo page = _i21.PageInfo(
     name,
     builder: (data) {
       final args = data.argsAs<MapRouteArgs>();
-      return _i8.MapPage(
+      return _i9.MapPage(
         key: args.key,
         currentPosition: args.currentPosition,
         isForShow: args.isForShow,
@@ -306,9 +327,9 @@ class MapRouteArgs {
     required this.isForShow,
   });
 
-  final _i21.Key? key;
+  final _i22.Key? key;
 
-  final _i22.LatLng currentPosition;
+  final _i23.LatLng currentPosition;
 
   final bool isForShow;
 
@@ -319,13 +340,13 @@ class MapRouteArgs {
 }
 
 /// generated route for
-/// [_i9.OTPPage]
-class OTPRoute extends _i20.PageRouteInfo<OTPRouteArgs> {
+/// [_i10.OTPPage]
+class OTPRoute extends _i21.PageRouteInfo<OTPRouteArgs> {
   OTPRoute({
-    _i21.Key? key,
+    _i22.Key? key,
     required String phoneNumber,
     required bool registering,
-    List<_i20.PageRouteInfo>? children,
+    List<_i21.PageRouteInfo>? children,
   }) : super(
           OTPRoute.name,
           args: OTPRouteArgs(
@@ -338,11 +359,11 @@ class OTPRoute extends _i20.PageRouteInfo<OTPRouteArgs> {
 
   static const String name = 'OTPRoute';
 
-  static _i20.PageInfo page = _i20.PageInfo(
+  static _i21.PageInfo page = _i21.PageInfo(
     name,
     builder: (data) {
       final args = data.argsAs<OTPRouteArgs>();
-      return _i9.OTPPage(
+      return _i10.OTPPage(
         key: args.key,
         phoneNumber: args.phoneNumber,
         registering: args.registering,
@@ -358,7 +379,7 @@ class OTPRouteArgs {
     required this.registering,
   });
 
-  final _i21.Key? key;
+  final _i22.Key? key;
 
   final String phoneNumber;
 
@@ -371,12 +392,12 @@ class OTPRouteArgs {
 }
 
 /// generated route for
-/// [_i10.ProfileInformationPage]
+/// [_i11.ProfileInformationPage]
 class ProfileInformationRoute
-    extends _i20.PageRouteInfo<ProfileInformationRouteArgs> {
+    extends _i21.PageRouteInfo<ProfileInformationRouteArgs> {
   ProfileInformationRoute({
-    _i21.Key? key,
-    List<_i20.PageRouteInfo>? children,
+    _i22.Key? key,
+    List<_i21.PageRouteInfo>? children,
   }) : super(
           ProfileInformationRoute.name,
           args: ProfileInformationRouteArgs(key: key),
@@ -385,12 +406,12 @@ class ProfileInformationRoute
 
   static const String name = 'ProfileInformationRoute';
 
-  static _i20.PageInfo page = _i20.PageInfo(
+  static _i21.PageInfo page = _i21.PageInfo(
     name,
     builder: (data) {
       final args = data.argsAs<ProfileInformationRouteArgs>(
           orElse: () => const ProfileInformationRouteArgs());
-      return _i10.ProfileInformationPage(key: args.key);
+      return _i11.ProfileInformationPage(key: args.key);
     },
   );
 }
@@ -398,7 +419,7 @@ class ProfileInformationRoute
 class ProfileInformationRouteArgs {
   const ProfileInformationRouteArgs({this.key});
 
-  final _i21.Key? key;
+  final _i22.Key? key;
 
   @override
   String toString() {
@@ -407,11 +428,11 @@ class ProfileInformationRouteArgs {
 }
 
 /// generated route for
-/// [_i11.RegisterPage]
-class RegisterRoute extends _i20.PageRouteInfo<RegisterRouteArgs> {
+/// [_i12.RegisterPage]
+class RegisterRoute extends _i21.PageRouteInfo<RegisterRouteArgs> {
   RegisterRoute({
-    _i23.Key? key,
-    List<_i20.PageRouteInfo>? children,
+    _i24.Key? key,
+    List<_i21.PageRouteInfo>? children,
   }) : super(
           RegisterRoute.name,
           args: RegisterRouteArgs(key: key),
@@ -420,12 +441,12 @@ class RegisterRoute extends _i20.PageRouteInfo<RegisterRouteArgs> {
 
   static const String name = 'RegisterRoute';
 
-  static _i20.PageInfo page = _i20.PageInfo(
+  static _i21.PageInfo page = _i21.PageInfo(
     name,
     builder: (data) {
       final args = data.argsAs<RegisterRouteArgs>(
           orElse: () => const RegisterRouteArgs());
-      return _i11.RegisterPage(key: args.key);
+      return _i12.RegisterPage(key: args.key);
     },
   );
 }
@@ -433,7 +454,7 @@ class RegisterRoute extends _i20.PageRouteInfo<RegisterRouteArgs> {
 class RegisterRouteArgs {
   const RegisterRouteArgs({this.key});
 
-  final _i23.Key? key;
+  final _i24.Key? key;
 
   @override
   String toString() {
@@ -442,11 +463,11 @@ class RegisterRouteArgs {
 }
 
 /// generated route for
-/// [_i12.SearchPage]
-class SearchRoute extends _i20.PageRouteInfo<SearchRouteArgs> {
+/// [_i13.SearchPage]
+class SearchRoute extends _i21.PageRouteInfo<SearchRouteArgs> {
   SearchRoute({
-    _i21.Key? key,
-    List<_i20.PageRouteInfo>? children,
+    _i22.Key? key,
+    List<_i21.PageRouteInfo>? children,
   }) : super(
           SearchRoute.name,
           args: SearchRouteArgs(key: key),
@@ -455,12 +476,12 @@ class SearchRoute extends _i20.PageRouteInfo<SearchRouteArgs> {
 
   static const String name = 'SearchRoute';
 
-  static _i20.PageInfo page = _i20.PageInfo(
+  static _i21.PageInfo page = _i21.PageInfo(
     name,
     builder: (data) {
       final args =
           data.argsAs<SearchRouteArgs>(orElse: () => const SearchRouteArgs());
-      return _i12.SearchPage(key: args.key);
+      return _i13.SearchPage(key: args.key);
     },
   );
 }
@@ -468,7 +489,7 @@ class SearchRoute extends _i20.PageRouteInfo<SearchRouteArgs> {
 class SearchRouteArgs {
   const SearchRouteArgs({this.key});
 
-  final _i21.Key? key;
+  final _i22.Key? key;
 
   @override
   String toString() {
@@ -477,9 +498,9 @@ class SearchRouteArgs {
 }
 
 /// generated route for
-/// [_i13.SettingsNavigatorPage]
-class SettingsNavigatorRoute extends _i20.PageRouteInfo<void> {
-  const SettingsNavigatorRoute({List<_i20.PageRouteInfo>? children})
+/// [_i14.SettingsNavigatorPage]
+class SettingsNavigatorRoute extends _i21.PageRouteInfo<void> {
+  const SettingsNavigatorRoute({List<_i21.PageRouteInfo>? children})
       : super(
           SettingsNavigatorRoute.name,
           initialChildren: children,
@@ -487,18 +508,18 @@ class SettingsNavigatorRoute extends _i20.PageRouteInfo<void> {
 
   static const String name = 'SettingsNavigatorRoute';
 
-  static _i20.PageInfo page = _i20.PageInfo(
+  static _i21.PageInfo page = _i21.PageInfo(
     name,
     builder: (data) {
-      return const _i13.SettingsNavigatorPage();
+      return const _i14.SettingsNavigatorPage();
     },
   );
 }
 
 /// generated route for
-/// [_i14.SettingsPage]
-class SettingsRoute extends _i20.PageRouteInfo<void> {
-  const SettingsRoute({List<_i20.PageRouteInfo>? children})
+/// [_i15.SettingsPage]
+class SettingsRoute extends _i21.PageRouteInfo<void> {
+  const SettingsRoute({List<_i21.PageRouteInfo>? children})
       : super(
           SettingsRoute.name,
           initialChildren: children,
@@ -506,18 +527,18 @@ class SettingsRoute extends _i20.PageRouteInfo<void> {
 
   static const String name = 'SettingsRoute';
 
-  static _i20.PageInfo page = _i20.PageInfo(
+  static _i21.PageInfo page = _i21.PageInfo(
     name,
     builder: (data) {
-      return const _i14.SettingsPage();
+      return const _i15.SettingsPage();
     },
   );
 }
 
 /// generated route for
-/// [_i15.StatisticsNavigatorPage]
-class StatisticsNavigatorRoute extends _i20.PageRouteInfo<void> {
-  const StatisticsNavigatorRoute({List<_i20.PageRouteInfo>? children})
+/// [_i16.StatisticsNavigatorPage]
+class StatisticsNavigatorRoute extends _i21.PageRouteInfo<void> {
+  const StatisticsNavigatorRoute({List<_i21.PageRouteInfo>? children})
       : super(
           StatisticsNavigatorRoute.name,
           initialChildren: children,
@@ -525,20 +546,20 @@ class StatisticsNavigatorRoute extends _i20.PageRouteInfo<void> {
 
   static const String name = 'StatisticsNavigatorRoute';
 
-  static _i20.PageInfo page = _i20.PageInfo(
+  static _i21.PageInfo page = _i21.PageInfo(
     name,
     builder: (data) {
-      return const _i15.StatisticsNavigatorPage();
+      return const _i16.StatisticsNavigatorPage();
     },
   );
 }
 
 /// generated route for
-/// [_i16.StatisticsPage]
-class StatisticsRoute extends _i20.PageRouteInfo<StatisticsRouteArgs> {
+/// [_i17.StatisticsPage]
+class StatisticsRoute extends _i21.PageRouteInfo<StatisticsRouteArgs> {
   StatisticsRoute({
-    _i21.Key? key,
-    List<_i20.PageRouteInfo>? children,
+    _i22.Key? key,
+    List<_i21.PageRouteInfo>? children,
   }) : super(
           StatisticsRoute.name,
           args: StatisticsRouteArgs(key: key),
@@ -547,12 +568,12 @@ class StatisticsRoute extends _i20.PageRouteInfo<StatisticsRouteArgs> {
 
   static const String name = 'StatisticsRoute';
 
-  static _i20.PageInfo page = _i20.PageInfo(
+  static _i21.PageInfo page = _i21.PageInfo(
     name,
     builder: (data) {
       final args = data.argsAs<StatisticsRouteArgs>(
           orElse: () => const StatisticsRouteArgs());
-      return _i16.StatisticsPage(key: args.key);
+      return _i17.StatisticsPage(key: args.key);
     },
   );
 }
@@ -560,7 +581,7 @@ class StatisticsRoute extends _i20.PageRouteInfo<StatisticsRouteArgs> {
 class StatisticsRouteArgs {
   const StatisticsRouteArgs({this.key});
 
-  final _i21.Key? key;
+  final _i22.Key? key;
 
   @override
   String toString() {
@@ -569,13 +590,13 @@ class StatisticsRouteArgs {
 }
 
 /// generated route for
-/// [_i17.TaskDetailsPage]
-class TaskDetailsRoute extends _i20.PageRouteInfo<TaskDetailsRouteArgs> {
+/// [_i18.TaskDetailsPage]
+class TaskDetailsRoute extends _i21.PageRouteInfo<TaskDetailsRouteArgs> {
   TaskDetailsRoute({
-    _i21.Key? key,
-    _i24.TaskEntity? task,
+    _i22.Key? key,
+    _i25.TaskEntity? task,
     String? id,
-    List<_i20.PageRouteInfo>? children,
+    List<_i21.PageRouteInfo>? children,
   }) : super(
           TaskDetailsRoute.name,
           args: TaskDetailsRouteArgs(
@@ -589,13 +610,13 @@ class TaskDetailsRoute extends _i20.PageRouteInfo<TaskDetailsRouteArgs> {
 
   static const String name = 'TaskDetailsRoute';
 
-  static _i20.PageInfo page = _i20.PageInfo(
+  static _i21.PageInfo page = _i21.PageInfo(
     name,
     builder: (data) {
       final pathParams = data.inheritedPathParams;
       final args = data.argsAs<TaskDetailsRouteArgs>(
           orElse: () => TaskDetailsRouteArgs(id: pathParams.optString('id')));
-      return _i17.TaskDetailsPage(
+      return _i18.TaskDetailsPage(
         key: args.key,
         task: args.task,
         id: args.id,
@@ -611,9 +632,9 @@ class TaskDetailsRouteArgs {
     this.id,
   });
 
-  final _i21.Key? key;
+  final _i22.Key? key;
 
-  final _i24.TaskEntity? task;
+  final _i25.TaskEntity? task;
 
   final String? id;
 
@@ -624,9 +645,9 @@ class TaskDetailsRouteArgs {
 }
 
 /// generated route for
-/// [_i18.TasksNavigatorPage]
-class TasksNavigatorRoute extends _i20.PageRouteInfo<void> {
-  const TasksNavigatorRoute({List<_i20.PageRouteInfo>? children})
+/// [_i19.TasksNavigatorPage]
+class TasksNavigatorRoute extends _i21.PageRouteInfo<void> {
+  const TasksNavigatorRoute({List<_i21.PageRouteInfo>? children})
       : super(
           TasksNavigatorRoute.name,
           initialChildren: children,
@@ -634,20 +655,20 @@ class TasksNavigatorRoute extends _i20.PageRouteInfo<void> {
 
   static const String name = 'TasksNavigatorRoute';
 
-  static _i20.PageInfo page = _i20.PageInfo(
+  static _i21.PageInfo page = _i21.PageInfo(
     name,
     builder: (data) {
-      return const _i18.TasksNavigatorPage();
+      return const _i19.TasksNavigatorPage();
     },
   );
 }
 
 /// generated route for
-/// [_i19.TasksPage]
-class TasksRoute extends _i20.PageRouteInfo<TasksRouteArgs> {
+/// [_i20.TasksPage]
+class TasksRoute extends _i21.PageRouteInfo<TasksRouteArgs> {
   TasksRoute({
-    _i21.Key? key,
-    List<_i20.PageRouteInfo>? children,
+    _i22.Key? key,
+    List<_i21.PageRouteInfo>? children,
   }) : super(
           TasksRoute.name,
           args: TasksRouteArgs(key: key),
@@ -656,12 +677,12 @@ class TasksRoute extends _i20.PageRouteInfo<TasksRouteArgs> {
 
   static const String name = 'TasksRoute';
 
-  static _i20.PageInfo page = _i20.PageInfo(
+  static _i21.PageInfo page = _i21.PageInfo(
     name,
     builder: (data) {
       final args =
           data.argsAs<TasksRouteArgs>(orElse: () => const TasksRouteArgs());
-      return _i19.TasksPage(key: args.key);
+      return _i20.TasksPage(key: args.key);
     },
   );
 }
@@ -669,7 +690,7 @@ class TasksRoute extends _i20.PageRouteInfo<TasksRouteArgs> {
 class TasksRouteArgs {
   const TasksRouteArgs({this.key});
 
-  final _i21.Key? key;
+  final _i22.Key? key;
 
   @override
   String toString() {

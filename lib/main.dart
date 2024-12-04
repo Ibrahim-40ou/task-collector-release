@@ -107,6 +107,8 @@ class MyApp extends StatelessWidget {
                           .setString('deepLink', deepLink.path.split('/').last);
                       return DeepLink.defaultPath;
                     } else {
+                      preferences!
+                          .setString('deepLink', deepLink.path.split('/').last);
                       return deepLink;
                     }
                   } else {

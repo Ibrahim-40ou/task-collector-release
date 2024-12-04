@@ -139,6 +139,7 @@ class AddTaskPage extends StatelessWidget {
         CustomBackButton(
           function: () {
             context.read<ImageSelectionBloc>().add(StopImageSelection());
+            context.router.maybePop();
           },
         ),
         SizedBox(height: 2.h),
